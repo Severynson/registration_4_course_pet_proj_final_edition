@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, CardMedia } from "@mui/material";
+import { Box, Typography, Grid, CardMedia, useSwitch } from "@mui/material";
 import severyn from "../../../Images/Severyn.jpg";
 import ponasenkov from "../../../Images/Ponasenkov.jpg";
 import baumeister from "../../../Images/Baumeister.jpg";
@@ -38,14 +38,30 @@ const carouselPages = [
 
 
 
-const Carousel = () => {
+const CarouselL = () => {
+    const [sliderWidth, useSliderWidth] = useState(800);
     const [offset, useOffset] = useState(0);
 
-    useEffect(() => {
-        console.log(window.screen.width);
-    }, []);
+    // useEffect(() => {
+    //     console.log(window.screen.width);
+    // }, []);
 
 
+    const SlideBack = () => {
+        console.log('efrew')
+        const newPosition = +offset + sliderWidth;
+        useOffset(newPosition);
+        console.log(offset);
+        
+    };
+
+    const SlideForward = () => {
+        console.log('efrew')
+        const newPosition = +offset - sliderWidth;
+        useOffset(newPosition);
+        console.log(offset);
+        
+    };
 
   return (
     <Box sx={{ width: "800px", margin: "0 auto", position: "relative" }}>
@@ -60,6 +76,7 @@ const Carousel = () => {
           borderRadius: "50%",
           zIndex: "100",
         }}
+        onClick={SlideBack}
       />
       <ArrowForwardIcon
         sx={{
@@ -72,6 +89,7 @@ const Carousel = () => {
           borderRadius: "50%",
           zIndex: "100",
         }}
+        onClick={SlideForward}
       />
       <Box
         sx={{
@@ -82,9 +100,8 @@ const Carousel = () => {
         }}
       >
         {carouselPages.map(({ image, name, feedbackText }, i) => {
-            const offset = -800;
           return (
-            <Box key={i} sx={{transform: `translateX(${offset}px)`}}>
+            <Box key={i} sx={{transform: `translateX(${offset}px)`, transition: "all 1s",}}>
               <Grid container  width="800px">
                 <Grid item xs={4}>
                   <Box>
@@ -112,4 +129,4 @@ const Carousel = () => {
   );
 };
 
-export default Carousel;
+export default CarouselL;
