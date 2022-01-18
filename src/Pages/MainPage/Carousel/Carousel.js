@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, CardMedia, useSwitch } from "@mui/material";
+import { Box, Typography, Grid, CardMedia, styled } from "@mui/material";
 import severyn from "../../../Images/Severyn.jpg";
 import ponasenkov from "../../../Images/Ponasenkov.jpg";
 import baumeister from "../../../Images/Baumeister.jpg";
@@ -12,7 +12,7 @@ const carouselPages = [
   {
     image: severyn,
     name: "Severyn Kurach",
-    feedbackText: `Thank you for watching my pet project. It is the fiirst one on React. I hope you would like it! If to be honest I can give feedback just about Maximillian Shwarzmuller's course. It was very  good. I learned a lot from it. I can advice it form 100%!`,
+    feedbackText: `Thank you for watching my pet project. It is the fiirst one on React. I hope you would like it! If to be honest I can give feedback just about Maximillian Shwarzmuller's course. It was very  good. I learned a lot from it. I can advice it for 100%!`,
   },
   {
     image: ponasenkov,
@@ -36,92 +36,126 @@ const carouselPages = [
   },
 ];
 
-
-
 const Carousel = () => {
-    const [sliderWidth, setSliderWidth] = useState(800);
-    const [offset, setOffset] = useState(0);
-    const [showArrowBack, setShowArrowBack] = useState(true);
-    const [showArrowForward, setShowArrowForward] = useState(true);
-    const quantityOfSlides = carouselPages.length;
-    const [sliderPosition, setSliderPosition] = useState(1);
+  const [sliderScale, setSliderScale] = useState(1);
+  const [offset, setOffset] = useState(0);
+  const [showArrowBack, setShowArrowBack] = useState(true);
+  const [showArrowForward, setShowArrowForward] = useState(true);
+  const quantityOfSlides = carouselPages.length;
+  const [sliderPosition, setSliderPosition] = useState(1);
+  const [sliderZPosition, setSliderZPosition] = useState(0);
+  const [sliderYPosition, setSliderYPosition] = useState(0);
 
-    useEffect(() => {
-        if (sliderPosition === 1) {
-            setShowArrowBack(false);
-        } else {
-            setShowArrowBack(true);
-        }
+  useEffect(() => {
+    if (sliderPosition === 1) {
+      setShowArrowBack(false);
+    } else {
+      setShowArrowBack(true);
+    }
 
-        if (sliderPosition === quantityOfSlides) {
-            setShowArrowForward(false);
-        } else {
-            setShowArrowForward(true);
-        }
-    }, [sliderPosition]);
+    if (sliderPosition === quantityOfSlides) {
+      setShowArrowForward(false);
+    } else {
+      setShowArrowForward(true);
+    }
+  }, [sliderPosition]);
 
-    useEffect(() => {
-        const width = window.screen.width;
-        if (width < 950 && width >= 850) {
-            setSliderWidth("750");
-            console.log('111111111');
-        } else if (width < 850 && width >= 750) {
-            setSliderWidth("650");
-            console.log('2222222222');
-        } else if (width < 750 && width >= 650) {
-            setSliderWidth("550");
-            console.log('33333333');
-        } else if (width < 650 && width >= 550) {
-            setSliderWidth("450");
-            console.log("44444444444")
-        } else if (width < 550 && width >= 450) {
-            setSliderWidth("350");
-            console.log("5555555555")
-        }
-        console.log(window.screen.width)
-    }, [sliderWidth]);
+  useEffect(() => {
+    const width = window.screen.width;
+    if (width < 950 && width >= 850) {
+      setSliderScale(0.9);
+      console.log("111111111");
+    } else if (width < 850 && width >= 750) {
+      setSliderScale(0.8);
+      console.log("2222222222");
+    } else if (width < 750 && width >= 650) {
+      setSliderScale(0.75);
+      console.log("33333333");
+    } else if (width < 650 && width >= 550) {
+      setSliderScale(0.6);
+      console.log("44444444444");
+    } else if (width < 550 && width >= 450) {
+      setSliderScale(0.5);
+      console.log("5555555555");
+    } else if (width < 450 && width >= 350) {
+        setSliderScale(0.4)
+    }
 
+    if (width >= 350 && width < 450) {
+      console.log("111111111");
+      setSliderZPosition(75);
+      setSliderYPosition(75)
+    } else if (width >=450 && width < 500) {
+        setSliderZPosition(47.5);
+        setSliderYPosition(40)
+     } else if (width >=500 && width <550) {
+        setSliderZPosition(41);
+        setSliderYPosition(50);
+    } else if (width >=550 && width < 650) {
+        setSliderZPosition(30);
+        setSliderYPosition(30);
+    } else if (width >=650 && width < 750) {
+        setSliderZPosition(16.5);
+        setSliderYPosition(20);
+    } else if (width >=750 && width <= 850) {
+        setSliderZPosition(7.5);
+        setSliderYPosition(10);
+    }
 
-    const slideBack = () => {
-        const newPosition = offset + +sliderWidth;
-        setOffset(newPosition);
-        setSliderPosition((curentValue) => curentValue - 1);
-    };
+    console.log(window.screen.width);
+  }, []);
 
-    const slideForward = () => {
-        const newPosition = offset - +sliderWidth;
-        setOffset(newPosition);
-        setSliderPosition((curentValue) => curentValue + 1);
-    };
+  const slideBack = () => {
+    const newPosition = offset + 800;
+    setOffset(newPosition);
+    setSliderPosition((curentValue) => curentValue - 1);
+  };
+
+  const slideForward = () => {
+    const newPosition = offset - 800;
+    setOffset(newPosition);
+    setSliderPosition((curentValue) => curentValue + 1);
+  };
 
   return (
-    <Box sx={{ width: `${sliderWidth}px`, margin: "0 auto", position: "relative" }}>
-      {showArrowBack && <ArrowBackIcon
-        sx={{
-          position: "absolute",
-          fontSize: "40px",
-          left: 0,
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          backgroundColor: "#868e96",
-          borderRadius: "50%",
-          zIndex: "100",
-        }}
-        onClick={slideBack}
-      />}
-      {showArrowForward && <ArrowForwardIcon
-        sx={{
-          position: "absolute",
-          fontSize: "40px",
-          right: 0,
-          top: "50%",
-          transform: "translate(50%, -50%)",
-          backgroundColor: "#868e96",
-          borderRadius: "50%",
-          zIndex: "100",
-        }}
-        onClick={slideForward}
-      />}
+    <Box
+      sx={{
+        width: "800px",
+        margin: "0 auto",
+        position: "relative",
+        transform: `scale(${sliderScale}) translate(-${sliderZPosition}%, -${sliderYPosition}%)`,
+      }}
+    >
+      {showArrowBack && (
+        <ArrowBackIcon
+          sx={{
+            position: "absolute",
+            fontSize: "40px",
+            left: 0,
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "#868e96",
+            borderRadius: "50%",
+            zIndex: "100",
+          }}
+          onClick={slideBack}
+        />
+      )}
+      {showArrowForward && (
+        <ArrowForwardIcon
+          sx={{
+            position: "absolute",
+            fontSize: "40px",
+            right: 0,
+            top: "50%",
+            transform: "translate(50%, -50%)",
+            backgroundColor: "#868e96",
+            borderRadius: "50%",
+            zIndex: "100",
+          }}
+          onClick={slideForward}
+        />
+      )}
       <Box
         sx={{
           display: "flex",
@@ -132,8 +166,14 @@ const Carousel = () => {
       >
         {carouselPages.map(({ image, name, feedbackText }, i) => {
           return (
-            <Box key={i} sx={{transform: `translateX(${offset}px)`, transition: "all 1s",}}>
-              <Grid container sx={{width: `${sliderWidth}px`}}>
+            <Box
+              key={i}
+              sx={{
+                transform: `translateX(${offset}px)`,
+                transition: "all 1s",
+              }}
+            >
+              <Grid container sx={{ width: "800px" }}>
                 <Grid item xs={4}>
                   <Box>
                     <CardMedia
@@ -148,7 +188,9 @@ const Carousel = () => {
                   </Box>
                 </Grid>
                 <Grid item xs={8} sx={{ p: "20px" }}>
-                  <Typography variant="h3" sx={{marginBottom: "3%", fontSize: "200%"}}>{name}</Typography>
+                  <Typography variant="h3" sx={{ marginBottom: "6%" }}>
+                    {name}
+                  </Typography>
                   <Typography variant="body1">{feedbackText}</Typography>
                 </Grid>
               </Grid>

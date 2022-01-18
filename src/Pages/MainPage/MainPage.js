@@ -7,7 +7,7 @@ import Carousel from "./Carousel/Carousel";
 const MainPage = () => {
   return (
     <main>
-      <Container >
+      <Container sx={{overflow: "hidden"}}>
         <AfterHeader />
         <FeatureCards />
         <Articles />
