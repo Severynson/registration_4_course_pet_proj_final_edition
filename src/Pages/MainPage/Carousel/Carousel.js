@@ -41,31 +41,41 @@ const carouselPages = [
 const CarouselL = () => {
     const [sliderWidth, useSliderWidth] = useState(800);
     const [offset, useOffset] = useState(0);
+    const [showArrowBack, setShowArrowBack] = useState(true);
+    const [showArrowForward, setShowArrowForward] = useState(true);
+    const quantityOfSlides = carouselPages.length;
+    const [sliderPosition, setSliderPosition] = useState(1);
 
-    // useEffect(() => {
-    //     console.log(window.screen.width);
-    // }, []);
+    useEffect(() => {
+        if (sliderPosition === 1) {
+            setShowArrowBack(false);
+        } else {
+            setShowArrowBack(true);
+        }
+
+        if (sliderPosition === quantityOfSlides) {
+            setShowArrowForward(false);
+        } else {
+            setShowArrowForward(true);
+        }
+    }, [sliderPosition]);
 
 
     const SlideBack = () => {
-        console.log('efrew')
         const newPosition = +offset + sliderWidth;
         useOffset(newPosition);
-        console.log(offset);
-        
+        setSliderPosition((curentValue) => curentValue - 1);
     };
 
     const SlideForward = () => {
-        console.log('efrew')
         const newPosition = +offset - sliderWidth;
         useOffset(newPosition);
-        console.log(offset);
-        
+        setSliderPosition((curentValue) => curentValue + 1);
     };
 
   return (
     <Box sx={{ width: "800px", margin: "0 auto", position: "relative" }}>
-      <ArrowBackIcon
+      {showArrowBack && <ArrowBackIcon
         sx={{
           position: "absolute",
           fontSize: "40px",
@@ -77,8 +87,8 @@ const CarouselL = () => {
           zIndex: "100",
         }}
         onClick={SlideBack}
-      />
-      <ArrowForwardIcon
+      />}
+      {showArrowForward && <ArrowForwardIcon
         sx={{
           position: "absolute",
           fontSize: "40px",
@@ -90,7 +100,7 @@ const CarouselL = () => {
           zIndex: "100",
         }}
         onClick={SlideForward}
-      />
+      />}
       <Box
         sx={{
           display: "flex",
