@@ -62,14 +62,22 @@ const Carousel = () => {
 
     useEffect(() => {
         const width = window.screen.width;
-        if (width >= 1980) {
-            console.log("hello 1980")
-            console.log(window.screen.width)
-        } else if (width >= 1360) {
-            console.log("Hello 1360")
-        } else if (width < 950) {
+        if (width < 950 && width >= 850) {
             setSliderWidth("750");
-        };
+            console.log('111111111');
+        } else if (width < 850 && width >= 750) {
+            setSliderWidth("650");
+            console.log('2222222222');
+        } else if (width < 750 && width >= 650) {
+            setSliderWidth("550");
+            console.log('33333333');
+        } else if (width < 650 && width >= 550) {
+            setSliderWidth("450");
+            console.log("44444444444")
+        } else if (width < 550 && width >= 450) {
+            setSliderWidth("350");
+            console.log("5555555555")
+        }
         console.log(window.screen.width)
     }, [sliderWidth]);
 
@@ -140,7 +148,7 @@ const Carousel = () => {
                   </Box>
                 </Grid>
                 <Grid item xs={8} sx={{ p: "20px" }}>
-                  <Typography variant="h3" sx={{marginBottom: "6%"}}>{name}</Typography>
+                  <Typography variant="h3" sx={{marginBottom: "3%", fontSize: "200%"}}>{name}</Typography>
                   <Typography variant="body1">{feedbackText}</Typography>
                 </Grid>
               </Grid>
