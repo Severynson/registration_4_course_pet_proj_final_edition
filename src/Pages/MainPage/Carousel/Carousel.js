@@ -38,9 +38,9 @@ const carouselPages = [
 
 
 
-const CarouselL = () => {
-    const [sliderWidth, useSliderWidth] = useState(800);
-    const [offset, useOffset] = useState(0);
+const Carousel = () => {
+    const [sliderWidth, setSliderWidth] = useState(800);
+    const [offset, setOffset] = useState(0);
     const [showArrowBack, setShowArrowBack] = useState(true);
     const [showArrowForward, setShowArrowForward] = useState(true);
     const quantityOfSlides = carouselPages.length;
@@ -60,21 +60,34 @@ const CarouselL = () => {
         }
     }, [sliderPosition]);
 
+    useEffect(() => {
+        const width = window.screen.width;
+        if (width >= 1980) {
+            console.log("hello 1980")
+            console.log(window.screen.width)
+        } else if (width >= 1360) {
+            console.log("Hello 1360")
+        } else if (width < 950) {
+            setSliderWidth("750");
+        };
+        console.log(window.screen.width)
+    }, [sliderWidth]);
 
-    const SlideBack = () => {
-        const newPosition = +offset + sliderWidth;
-        useOffset(newPosition);
+
+    const slideBack = () => {
+        const newPosition = offset + +sliderWidth;
+        setOffset(newPosition);
         setSliderPosition((curentValue) => curentValue - 1);
     };
 
-    const SlideForward = () => {
-        const newPosition = +offset - sliderWidth;
-        useOffset(newPosition);
+    const slideForward = () => {
+        const newPosition = offset - +sliderWidth;
+        setOffset(newPosition);
         setSliderPosition((curentValue) => curentValue + 1);
     };
 
   return (
-    <Box sx={{ width: "800px", margin: "0 auto", position: "relative" }}>
+    <Box sx={{ width: `${sliderWidth}px`, margin: "0 auto", position: "relative" }}>
       {showArrowBack && <ArrowBackIcon
         sx={{
           position: "absolute",
@@ -86,7 +99,7 @@ const CarouselL = () => {
           borderRadius: "50%",
           zIndex: "100",
         }}
-        onClick={SlideBack}
+        onClick={slideBack}
       />}
       {showArrowForward && <ArrowForwardIcon
         sx={{
@@ -99,7 +112,7 @@ const CarouselL = () => {
           borderRadius: "50%",
           zIndex: "100",
         }}
-        onClick={SlideForward}
+        onClick={slideForward}
       />}
       <Box
         sx={{
@@ -112,7 +125,7 @@ const CarouselL = () => {
         {carouselPages.map(({ image, name, feedbackText }, i) => {
           return (
             <Box key={i} sx={{transform: `translateX(${offset}px)`, transition: "all 1s",}}>
-              <Grid container  width="800px">
+              <Grid container sx={{width: `${sliderWidth}px`}}>
                 <Grid item xs={4}>
                   <Box>
                     <CardMedia
@@ -126,7 +139,7 @@ const CarouselL = () => {
                     />
                   </Box>
                 </Grid>
-                <Grid item xs={8} sx={{ p: "10px" }}>
+                <Grid item xs={8} sx={{ p: "20px" }}>
                   <Typography variant="h3" sx={{marginBottom: "6%"}}>{name}</Typography>
                   <Typography variant="body1">{feedbackText}</Typography>
                 </Grid>
@@ -139,4 +152,4 @@ const CarouselL = () => {
   );
 };
 
-export default CarouselL;
+export default Carousel;
