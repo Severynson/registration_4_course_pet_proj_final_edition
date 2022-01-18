@@ -1,9 +1,12 @@
-import { Box } from "@mui/material";
+import { Box, Typography, Grid, CardMedia } from "@mui/material";
 import severyn from "../../../Images/Severyn.jpg";
 import ponasenkov from "../../../Images/Ponasenkov.jpg";
-import baumeister from "../../../Images/Baumeister.jpg"
-import heidegger from "../../../Images/Heideggert.jpg"
-import plato from "../../../Images/Plato.jpg"
+import baumeister from "../../../Images/Baumeister.jpg";
+import heidegger from "../../../Images/Heidegger.jpg";
+import plato from "../../../Images/Plato.jpg";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useEffect, useState } from "react";
 
 const carouselPages = [
   {
@@ -14,34 +17,98 @@ const carouselPages = [
   {
     image: ponasenkov,
     name: "Evgeniy Ponasenkov (Just Maestro)",
-    feedbackText: `Maestro gives hist best compliment's! I get learned to make the beast sites. Now I like site estetic much more than art! I lost my mind with so cool framework like React.`, 
+    feedbackText: `Maestro gives hist best compliment's! I get learned to make the beast sites. Now I like site estetic much more than art! I lost my mind with so cool framework like React.`,
   },
   {
     image: baumeister,
     name: "Andriy Baumeister",
-    feedbackText: `Why I started to visiting React courses!? Philosophy is hard of course, but React... React is like a hell of Dante!!! AAAAaaaAAaaa!!!`, 
+    feedbackText: `Why I started to visiting React courses!? Philosophy is hard of course, but React... React is like a hell of Dante!!! AAAAaaaAAaaa!!!`,
   },
   {
     image: heidegger,
     name: "Martin Heidegger",
-    feedbackText: `Dasein? DaSeiiiin!! On this course I had written my first component function, it is: const Dasein = ({dasein}) => {return <p>Hello {dasein}!</p>)};`, 
+    feedbackText: `Dasein? DaSeiiiin!! On this course I had written my first component function, it is: const Dasein = ({dasein}) => {return <p>Hello {dasein}!</p>)};`,
   },
   {
     image: plato,
     name: "Plato",
-    feedbackText: `What I'm doing here??? Am I not dead for 2360+ years already? Severyn, sorry... BUT I CAN'T WRITE A FEEDBACK FOR YOUR PET PROJECT! LIVE ME ALONE!!!`, 
+    feedbackText: `What I'm doing here??? Am I not dead for 2360+ years already? Severyn, sorry... BUT I CAN'T WRITE A FEEDBACK FOR YOUR PET PROJECT! LIVE ME ALONE!!!`,
   },
-
 ];
 
+
+
 const Carousel = () => {
+    const [offset, useOffset] = useState(0);
+
+    useEffect(() => {
+        console.log(window.screen.width);
+    }, []);
+
+
+
   return (
-    <>
-      <Box>
-        <Box>
-        </Box>
+    <Box sx={{ width: "800px", margin: "0 auto", position: "relative" }}>
+      <ArrowBackIcon
+        sx={{
+          position: "absolute",
+          fontSize: "40px",
+          left: 0,
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+          backgroundColor: "#868e96",
+          borderRadius: "50%",
+          zIndex: "100",
+        }}
+      />
+      <ArrowForwardIcon
+        sx={{
+          position: "absolute",
+          fontSize: "40px",
+          right: 0,
+          top: "50%",
+          transform: "translate(50%, -50%)",
+          backgroundColor: "#868e96",
+          borderRadius: "50%",
+          zIndex: "100",
+        }}
+      />
+      <Box
+        sx={{
+          display: "flex",
+          overflow: "hidden",
+          borderRadius: "30px",
+          bgcolor: "#90caf9",
+        }}
+      >
+        {carouselPages.map(({ image, name, feedbackText }, i) => {
+            const offset = -800;
+          return (
+            <Box key={i} sx={{transform: `translateX(${offset}px)`}}>
+              <Grid container  width="800px">
+                <Grid item xs={4}>
+                  <Box>
+                    <CardMedia
+                      sx={{
+                        width: "100%",
+                        height: "auto",
+                      }}
+                      component="img"
+                      image={image}
+                      title={name}
+                    />
+                  </Box>
+                </Grid>
+                <Grid item xs={8} sx={{ p: "10px" }}>
+                  <Typography variant="h3" sx={{marginBottom: "6%"}}>{name}</Typography>
+                  <Typography variant="body1">{feedbackText}</Typography>
+                </Grid>
+              </Grid>
+            </Box>
+          );
+        })}
       </Box>
-    </>
+    </Box>
   );
 };
 
