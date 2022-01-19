@@ -6,16 +6,40 @@ import {
   FilledInput,
   Button,
   Grid,
+  Typography,
 } from "@mui/material";
 import hulk from "../Images/Hulk.jpg";
 import flanders from "../Images/Flanders.jpg";
 import SendIcon from "@mui/icons-material/Send";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { blue } from "@mui/material/colors";
 import { Formik, Form, useFormik } from "formik";
 const backgroundColor = blue[200];
 
+const hulkData = [hulk, "After course"];
+const flandersData = [flanders, "Before course"];
+
 const UsernamePasswordForm = ({ type, sendData }) => {
+
+    const [animation, setAnimation] = useState(hulkData);
+    const [bulinForAnimation, setBulinForAnimation] = useState(true);
+  
+    useEffect(() => {
+      if (bulinForAnimation) {
+        setAnimation(() => flandersData);
+      } else if (!bulinForAnimation) {
+        setAnimation(() => hulkData);
+      }
+      stateChangingFunc();
+    }, [bulinForAnimation]);
+  
+    const stateChangingFunc = () => {
+      setTimeout(() => {
+        setBulinForAnimation((prevState) => !prevState);
+      }, 7000);
+    };
+
+    //
 
   const formik = useFormik({
       initialValues: {
@@ -28,9 +52,6 @@ const UsernamePasswordForm = ({ type, sendData }) => {
       },
   });
 
-  const [image, setImage] = useState(hulk);
-
-
   return (
     <Box
       sx={{
@@ -42,8 +63,9 @@ const UsernamePasswordForm = ({ type, sendData }) => {
         overflow: "hidden",
       }}
     >
-      <Box sx={{ width: "300px" }}>
-        <CardMedia component="img" src={image} />
+      <Box sx={{ width: "300px", position: "relative" }}>
+        <CardMedia component="img" src={animation[0]} />
+        <Typography sx={{position: "absolute", bottom: "10px", color: "#fff", lineHeight: "0.75", textAlign: "center"}} variant="h2">{animation[1]}</Typography>
       </Box>
       <Grid
         container
