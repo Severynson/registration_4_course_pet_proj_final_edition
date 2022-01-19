@@ -1,4 +1,4 @@
-import itIncubator from "../../Images/ItIncubator.png";
+import itIncubator from "../../../Images/ItIncubator.png";
 import * as React from "react";
 import {
   BottomNavigation,

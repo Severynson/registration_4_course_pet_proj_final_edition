@@ -1,17 +1,23 @@
-import "./App.css";
-import Header from "./Components/Header/Header";
+import Layout from "./Components/Layout/Layout";
 import MainPage from "./Pages/MainPage/MainPage";
-import Footer from "./Components/Footer/Footer";
-import { Route, Routes } from "react-router-dom";
+import Registration from "./Pages/Registration/Registration";
+import LogIn from "./Pages/LogIn/LogIn";
+import Admin from "./Pages/Admin/Admin";
+import { Route, Routes, Navigate } from "react-router-dom";
+
 
 function App() {
   return (
     <>
-      <Header />
       <Routes>
-        <Route path="/mainpage" element={<MainPage />} />
+        <Route path="/" element={<Layout />}>
+        <Route path="" element={<Navigate to="mainpage" />} />
+        <Route path="mainpage" element={<MainPage />} />
+        <Route path="registration" element={<Registration />} />
+        <Route path="login" element={<LogIn />} />
+        <Route path="admin" element={<Admin /> } />
+        </Route>
       </Routes>
-      <Footer />
     </>
   );
 }

@@ -3,6 +3,7 @@ import FeatureCards from "./FeatureCards/FeatureCards";
 import { Container } from "@mui/material";
 import Articles from "./Articles/Articles";
 import Carousel from "./Carousel/Carousel";
+import { Link } from "react-router-dom";
 
 const MainPage = () => {
   return (
@@ -13,6 +14,7 @@ const MainPage = () => {
         <Articles />
         <Carousel />
       </Container>
+      
     </main>
   );
 };

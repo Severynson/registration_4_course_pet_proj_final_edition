@@ -11,3 +11,10 @@ body {
     display: flex;
     flex-direction: column;
   }
+
+  /* .active {
+    transition: all 0.5s;
+    transform: scale(1.05) translateY(10%);
+    background-color: #fafafa;
+    color: #1565c0 !important;
+  } */
