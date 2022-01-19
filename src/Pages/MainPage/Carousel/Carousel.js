@@ -97,7 +97,7 @@ const Carousel = () => {
         setSliderZPosition(7.5);
         setSliderYPosition(10);
     }
-    console.log('gwgwtrg')
+
   }, [windowWidth]);
 
   const slideBack = () => {
