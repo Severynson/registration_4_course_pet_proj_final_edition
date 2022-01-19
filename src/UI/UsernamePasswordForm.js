@@ -39,16 +39,14 @@ const UsernamePasswordForm = ({ type, sendData }) => {
       }, 7000);
     };
 
-    //
-
   const formik = useFormik({
       initialValues: {
       username: "",
       password: "",
-      passwordAgain: "", 
+      passwordAgain: "",
       },
       onSubmit: values => {
-        console.log(values);
+        sendData(values);
       },
   });
 
