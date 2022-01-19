@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from '@mui/icons-material/Home';
 import Box from "@mui/material/Box";
 import { grey } from "@mui/material/colors";
 import { NavLink } from "react-router-dom";
@@ -35,6 +36,9 @@ const Header = () => {
           </NavLink>
           <NavLink to="login" style={navStyle()}>
             <Button color="inherit" >Login</Button>
+          </NavLink>
+          <NavLink to="mainpage" style={navStyle()}>
+            <Button color="inherit" ><HomeIcon /></Button>
           </NavLink>
         </Toolbar>
       </AppBar>
