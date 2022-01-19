@@ -184,6 +184,7 @@ const Carousel = () => {
                       component="img"
                       image={image}
                       title={name}
+                      loading="lazy"
                     />
                   </Box>
                 </Grid>

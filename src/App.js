@@ -1,13 +1,18 @@
-import './App.css';
-import Header from './Components/Header/Header';
-import MainPage from './Pages/MainPage/MainPage';
+import "./App.css";
+import Header from "./Components/Header/Header";
+import MainPage from "./Pages/MainPage/MainPage";
+import Footer from "./Components/Footer/Footer";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Header />
-      <MainPage />
-    </div>
+      <Routes>
+        <Route path="/mainpage" element={<MainPage />} />
+      </Routes>
+      <Footer />
+    </>
   );
 }
 

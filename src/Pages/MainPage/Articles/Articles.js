@@ -37,8 +37,8 @@ const Articles = () => {
       <Typography
         sx={{
           position: "absolute",
-          right: 0,
-          paddingRight: "20px",
+          right: 20,
+          top: 5,
           fontStyle: "italic",
           color: "#fff",
         }}
