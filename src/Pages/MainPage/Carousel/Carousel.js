@@ -45,6 +45,8 @@ const Carousel = () => {
   const [sliderPosition, setSliderPosition] = useState(1);
   const [sliderZPosition, setSliderZPosition] = useState(0);
   const [sliderYPosition, setSliderYPosition] = useState(0);
+  const [windowWidth] = useState(window.innerWidth);
+
 
   useEffect(() => {
     if (sliderPosition === 1) {
@@ -61,49 +63,42 @@ const Carousel = () => {
   }, [sliderPosition]);
 
   useEffect(() => {
-    const width = window.screen.width;
-    if (width < 950 && width >= 850) {
+    if (windowWidth < 950 && windowWidth >= 850) {
       setSliderScale(0.9);
-      console.log("111111111");
-    } else if (width < 850 && width >= 750) {
+    } else if (windowWidth < 850 && windowWidth >= 750) {
       setSliderScale(0.8);
-      console.log("2222222222");
-    } else if (width < 750 && width >= 650) {
+    } else if (windowWidth < 750 && windowWidth >= 650) {
       setSliderScale(0.75);
-      console.log("33333333");
-    } else if (width < 650 && width >= 550) {
+    } else if (windowWidth < 650 && windowWidth >= 550) {
       setSliderScale(0.6);
-      console.log("44444444444");
-    } else if (width < 550 && width >= 450) {
+    } else if (windowWidth < 550 && windowWidth >= 450) {
       setSliderScale(0.5);
-      console.log("5555555555");
-    } else if (width < 450 && width >= 350) {
+    } else if (windowWidth < 450 && windowWidth >= 350) {
         setSliderScale(0.4)
     }
 
-    if (width >= 350 && width < 450) {
+    if (windowWidth >= 350 && windowWidth < 450) {
       console.log("111111111");
       setSliderZPosition(75);
       setSliderYPosition(75)
-    } else if (width >=450 && width < 500) {
+    } else if (windowWidth >=450 && windowWidth < 500) {
         setSliderZPosition(47.5);
         setSliderYPosition(40)
-     } else if (width >=500 && width <550) {
+     } else if (windowWidth >=500 && windowWidth <550) {
         setSliderZPosition(41);
         setSliderYPosition(50);
-    } else if (width >=550 && width < 650) {
+    } else if (windowWidth >=550 && windowWidth < 650) {
         setSliderZPosition(30);
         setSliderYPosition(30);
-    } else if (width >=650 && width < 750) {
+    } else if (windowWidth >=650 && windowWidth < 750) {
         setSliderZPosition(16.5);
         setSliderYPosition(20);
-    } else if (width >=750 && width <= 850) {
+    } else if (windowWidth >=750 && windowWidth <= 850) {
         setSliderZPosition(7.5);
         setSliderYPosition(10);
     }
-
-    console.log(window.screen.width);
-  }, []);
+    console.log('gwgwtrg')
+  }, [windowWidth]);
 
   const slideBack = () => {
     const newPosition = offset + 800;
