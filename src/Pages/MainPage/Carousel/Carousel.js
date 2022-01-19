@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, CardMedia, styled } from "@mui/material";
+import { Box, Typography, Grid, CardMedia } from "@mui/material";
 import severyn from "../../../Images/Severyn.jpg";
 import ponasenkov from "../../../Images/Ponasenkov.jpg";
 import baumeister from "../../../Images/Baumeister.jpg";
@@ -60,7 +60,7 @@ const Carousel = () => {
     } else {
       setShowArrowForward(true);
     }
-  }, [sliderPosition]);
+  }, [sliderPosition, quantityOfSlides]);
 
   useEffect(() => {
     if (windowWidth < 950 && windowWidth >= 850) {

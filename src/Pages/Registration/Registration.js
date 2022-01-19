@@ -1,5 +1,15 @@
+import UsernamePasswordForm from "../../UI/UsernamePasswordForm";
+
 const Registration = () => {
-    return (<h2>Registration Demo</h2>)
+    const addUsernameAndPassword = ([username, password]) => {
+        console.log(username, password);
+    };
+
+  return (
+    <>
+    <UsernamePasswordForm type="registration" sendData={addUsernameAndPassword} />
+    </>
+  );
 };
 
 export default Registration;

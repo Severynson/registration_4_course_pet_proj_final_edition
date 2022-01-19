@@ -14,7 +14,7 @@ const navStyle = () => ({isActive}) => ({color: isActive ? "#1565c0" : "#fafafa"
 
 const Header = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box>
       <AppBar position="static">
         <Toolbar>
           <IconButton
