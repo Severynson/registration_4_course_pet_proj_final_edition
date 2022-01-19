@@ -24,16 +24,12 @@ const UsernamePasswordForm = ({ type, sendData }) => {
       passwordAgain: "", 
       },
       onSubmit: values => {
-        // alert(JSON.stringify(values, null, 2));
         console.log(values);
       },
   });
 
   const [image, setImage] = useState(hulk);
-//   const [username, setUsername] = useState("Composed TextField");
-//   const handleChange = (event) => {
-//     setUsername(event.target.value);
-//   };
+
 
   return (
     <Box
@@ -51,20 +47,14 @@ const UsernamePasswordForm = ({ type, sendData }) => {
       </Box>
       <Grid
         container
-        sx={{ width: "500px" }}
+        sx={{ width: "400px" }}
         justifyContent="center"
         alignItems="center"
       >
-        {/* <form onSubmit={(e) => {
-              e.preventDefault();
-              sendData([1, "works"])}}>
-              <input />
-              <input />
-              <button>Submit</button>
-          </form> */}
-
         <Formik>
             <Form onSubmit={formik.handleSubmit}>
+                <Grid container direction="column" alignItems="center">
+              <Grid item>  
           <FormControl variant="filled">
             <InputLabel htmlFor="username">Username</InputLabel>
             <FilledInput
@@ -74,6 +64,8 @@ const UsernamePasswordForm = ({ type, sendData }) => {
               onChange={formik.handleChange}
             />
              </FormControl>
+             </Grid>
+             <Grid item>
              <FormControl variant="filled">
             <InputLabel htmlFor="password">Password</InputLabel>
             <FilledInput
@@ -83,6 +75,8 @@ const UsernamePasswordForm = ({ type, sendData }) => {
               onChange={formik.handleChange}
             />
             </FormControl>
+            </Grid>
+            <Grid item>
             <FormControl variant="filled">
             <InputLabel htmlFor="passwordAgain">Password again</InputLabel>
             <FilledInput
@@ -91,10 +85,14 @@ const UsernamePasswordForm = ({ type, sendData }) => {
               value={formik.values.passwordAgain}
               onChange={formik.handleChange}
             />
+            </FormControl>
+            </Grid>
+            <Grid item>
             <Button type="submit" variant="contained" endIcon={<SendIcon />}>
               Submit
             </Button>
-          </FormControl>
+            </Grid>
+          </Grid>
           </Form>
         </Formik>
       </Grid>
