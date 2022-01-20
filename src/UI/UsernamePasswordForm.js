@@ -14,7 +14,8 @@ import flanders from "../Images/Flanders.jpg";
 import SendIcon from "@mui/icons-material/Send";
 import { useState, useEffect } from "react";
 import { blue, red } from "@mui/material/colors";
-import { Formik, Form, useFormik } from "formik";
+import { Formik, Form, useFormik, useField } from "formik";
+import * as Yup from "yup";
 const backgroundColor = blue[200];
 
 const hulkData = [hulk, "After course"];
@@ -24,45 +25,9 @@ const flandersData = [flanders, "Before course"];
 
 const UsernamePasswordForm = ({ type, sendData }) => {
 
-    const [usernameErr, setUsernameErr] = useState(false);
-    const [passwordErr, setPasswordErr] = useState(false);
-    const [passwordAgainErr, setPasswordAgainErr] = useState(false);
-    
-const validate = (values) => {
-
-    const errors = {};
-
-    if (!values.username || !values.password || !values.passwordAgain) {
-       alert("Form can't be submitet while being empty"); 
-    }
-
-    if (!values.username) {
-      errors.username = 'Required';
-      setUsernameErr(true);
-    } else if (values.username.length > 15) {
-      errors.username = 'Must be 15 characters or less';
-    }
-  
-    if (!values.password) {
-      errors.password = 'Required';
-      setPasswordErr(true);
-    } else if (values.password.length > 20) {
-      errors.password = 'Must be 20 characters or less';
-    }
-  
-    if (!values.passwordAgain) {
-      errors.passwordAgain = 'Required';
-      setPasswordAgainErr(true);
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.passwordAgain)) {
-      errors.passwordAgain = 'Invalid passwordAgain address';
-    }
-  
-    console.log(errors);
-    return errors;
-  };
-
     const [animation, setAnimation] = useState(hulkData);
     const [bulinForAnimation, setBulinForAnimation] = useState(true);
+    
   
     useEffect(() => {
       if (bulinForAnimation) {
@@ -79,6 +44,33 @@ const validate = (values) => {
       }, 7000);
     };
 
+    const validationSchema = (data) => {
+        console.log(data);
+    };
+
+    const validate = values => {
+        const errors = {};
+        if (!values.username) {
+          errors.username = 'Required';
+        } else if (values.username.length < 5) {
+          errors.username = 'Must be 5 characters or more';
+        }
+      
+        if (!values.password) {
+          errors.password = 'Required';
+        } else if (values.password.length < 6 ||  !/\d/.test(values.password)) {
+          errors.password = 'Too short or without numbers';
+        }
+      
+        if (!values.passwordAgain) {
+          errors.passwordAgain = 'Required';
+        } else if (values.password !== values.passwordAgain) {
+          errors.passwordAgain = 'Passwords are not matching';
+        }
+      
+        return errors;
+      };
+
   
 
   const formik = useFormik({
@@ -87,13 +79,19 @@ const validate = (values) => {
       password: "",
       passwordAgain: "",
       },
-      validate,
-      onSubmit: values => {
+      validationSchema: Yup.object({
+          login: Yup.string().min(5, "Must be 5 characters or more").required("Required"),
+          password: Yup.string().min(5, "efre").required("Required"),
+          passwordAgain: Yup.string().oneOf([Yup.ref("password")], "Passwords are not matching")
+      }),
+      onSubmit: (values, formikHelpers) => {
         sendData(values);
+        formikHelpers.resetForm();
       },
   });
 
-// const [field, mata] = useField(formik);
+// const [field, meta] = useField(formik.values);
+// console.log(formik)
 
   return (
     <Box
@@ -118,8 +116,8 @@ const validate = (values) => {
       >
         <Formik>
             <Form onSubmit={formik.handleSubmit}>
-                <Grid container direction="column" alignItems="center">
-              <Grid item>  
+                <Grid container direction="column" alignItems="center" width="300px">
+              <Grid item>
           <FormControl variant="filled">
             <InputLabel htmlFor="username">Username</InputLabel>
             <FilledInput
@@ -127,9 +125,10 @@ const validate = (values) => {
               name="username"
               value={formik.values.username}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               aria-describedby="component-error-text"
             />
-            {usernameErr && <FormHelperText id="component-error-text">Error</FormHelperText>}
+            {formik.errors.username && <FormHelperText sx={{color: red[500]}} id="component-error-text">{formik.errors.username}</FormHelperText>}
              </FormControl>
              </Grid>
              <Grid item>
@@ -140,9 +139,10 @@ const validate = (values) => {
               name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               aria-describedby="component-error-text"
             />
-            {passwordErr && <FormHelperText id="component-error-text">Error</FormHelperText>}
+            {formik.errors.password && <FormHelperText sx={{color: red[500]}} id="component-error-text">{formik.errors.password}</FormHelperText>}
             </FormControl>
             </Grid>
             <Grid item>
@@ -153,9 +153,10 @@ const validate = (values) => {
               name="passwordAgain"
               value={formik.values.passwordAgain}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               aria-describedby="component-error-text"
             />
-            {passwordAgainErr && <FormHelperText id="component-error-text">Error</FormHelperText>}
+            {formik.errors.passwordAgain && <FormHelperText sx={{color: red[500]}} id="component-error-text">{formik.errors.passwordAgain}</FormHelperText>}
             </FormControl>
             </Grid>
             <Grid item>
