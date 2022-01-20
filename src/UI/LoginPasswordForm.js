@@ -75,8 +75,9 @@ const LoginPasswordForm = ({ type, sendData }) => {
         overflow: "hidden",
       }}
     >
-      <Box sx={{ width: "300px", position: "relative" }}>
-        <CardMedia component="img" src={animation[0]} />
+      <Grid container>
+      <Grid item xs={12} md={6} xl={6} sx={{ width: "300px", height: "300px", position: "relative" }}>
+        <CardMedia component="img" src={animation[0]} height="300px" width= "300px" />
         <Typography
           sx={{
             position: "absolute",
@@ -89,10 +90,11 @@ const LoginPasswordForm = ({ type, sendData }) => {
         >
           {animation[1]}
         </Typography>
-      </Box>
+      </Grid>
+      <Grid item  xs={12} md={6} xl={6} justifyContent="center" alignItems="center">
       <Grid
+        sx={{marginTop: "17%", marginBottom: "45px"}}
         container
-        sx={{ width: "400px" }}
         justifyContent="center"
         alignItems="center"
       >
@@ -181,6 +183,8 @@ const LoginPasswordForm = ({ type, sendData }) => {
             </Grid>
           </Form>
         </Formik>
+      </Grid>
+      </Grid>
       </Grid>
     </Box>
   );
