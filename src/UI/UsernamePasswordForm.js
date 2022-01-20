@@ -72,7 +72,6 @@ const UsernamePasswordForm = ({ type, sendData }) => {
       };
 
   
-
   const {handleSubmit, handleChange, values, touched, errors} = useFormik({
       initialValues: {
       login: "",
@@ -81,7 +80,7 @@ const UsernamePasswordForm = ({ type, sendData }) => {
       },
       validationSchema: Yup.object({
           login: Yup.string().min(5, "Must be 5 characters or more").required("Required"),
-          password: Yup.string().min(5, "efre").required("Required"),
+          password: Yup.string().min(6).matches(/\d/, "Has to include a number").required("Required"),
           passwordAgain: Yup.string().oneOf([Yup.ref("password")], "Passwords are not matching")
       }),
       onSubmit: (values, formikHelpers) => {
