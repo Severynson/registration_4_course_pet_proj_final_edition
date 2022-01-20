@@ -127,7 +127,7 @@ const UsernamePasswordForm = ({ type, sendData }) => {
               onChange={handleChange}
               aria-describedby="component-error-text"
             />
-            {touched.login && errors.login && <FormHelperText sx={{color: red[500]}} id="component-error-text">{errors.username}</FormHelperText>}
+            {touched.login && errors.login && <FormHelperText sx={{color: red[500]}} id="component-error-text">{errors.login}</FormHelperText>}
              </FormControl>
              </Grid>
              <Grid item>
