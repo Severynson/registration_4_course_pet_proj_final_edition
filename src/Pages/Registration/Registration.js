@@ -1,4 +1,4 @@
-import UsernamePasswordForm from "../../UI/UsernamePasswordForm";
+import UsernamePasswordForm from "../../UI/LoginPasswordForm";
 
 const Registration = () => {
     const addUsernameAndPassword = (inputValues) => {
