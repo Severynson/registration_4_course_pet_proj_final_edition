@@ -1,5 +1,11 @@
+import LoginPasswordForm from "../../UI/LoginPasswordForm"
+
 const LogIn = () => {
-    return (<h2>Login Demo</h2>);
+    const handleLoginAndPassword = (e) => {
+        console.log(e);
+    };
+
+    return (<LoginPasswordForm type="login" sendData={handleLoginAndPassword} />);
 };
 
 export default LogIn;
