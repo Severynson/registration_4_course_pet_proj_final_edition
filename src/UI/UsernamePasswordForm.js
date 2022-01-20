@@ -7,19 +7,59 @@ import {
   Button,
   Grid,
   Typography,
+  FormHelperText,
 } from "@mui/material";
 import hulk from "../Images/Hulk.jpg";
 import flanders from "../Images/Flanders.jpg";
 import SendIcon from "@mui/icons-material/Send";
 import { useState, useEffect } from "react";
-import { blue } from "@mui/material/colors";
+import { blue, red } from "@mui/material/colors";
 import { Formik, Form, useFormik } from "formik";
 const backgroundColor = blue[200];
 
 const hulkData = [hulk, "After course"];
 const flandersData = [flanders, "Before course"];
 
+
+
 const UsernamePasswordForm = ({ type, sendData }) => {
+
+    const [usernameErr, setUsernameErr] = useState(false);
+    const [passwordErr, setPasswordErr] = useState(false);
+    const [passwordAgainErr, setPasswordAgainErr] = useState(false);
+    
+const validate = (values) => {
+
+    const errors = {};
+
+    if (!values.username || !values.password || !values.passwordAgain) {
+       alert("Form can't be submitet while being empty"); 
+    }
+
+    if (!values.username) {
+      errors.username = 'Required';
+      setUsernameErr(true);
+    } else if (values.username.length > 15) {
+      errors.username = 'Must be 15 characters or less';
+    }
+  
+    if (!values.password) {
+      errors.password = 'Required';
+      setPasswordErr(true);
+    } else if (values.password.length > 20) {
+      errors.password = 'Must be 20 characters or less';
+    }
+  
+    if (!values.passwordAgain) {
+      errors.passwordAgain = 'Required';
+      setPasswordAgainErr(true);
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.passwordAgain)) {
+      errors.passwordAgain = 'Invalid passwordAgain address';
+    }
+  
+    console.log(errors);
+    return errors;
+  };
 
     const [animation, setAnimation] = useState(hulkData);
     const [bulinForAnimation, setBulinForAnimation] = useState(true);
@@ -39,16 +79,21 @@ const UsernamePasswordForm = ({ type, sendData }) => {
       }, 7000);
     };
 
+  
+
   const formik = useFormik({
       initialValues: {
       username: "",
       password: "",
       passwordAgain: "",
       },
+      validate,
       onSubmit: values => {
         sendData(values);
       },
   });
+
+// const [field, mata] = useField(formik);
 
   return (
     <Box
@@ -82,7 +127,9 @@ const UsernamePasswordForm = ({ type, sendData }) => {
               name="username"
               value={formik.values.username}
               onChange={formik.handleChange}
+              aria-describedby="component-error-text"
             />
+            {usernameErr && <FormHelperText id="component-error-text">Error</FormHelperText>}
              </FormControl>
              </Grid>
              <Grid item>
@@ -93,7 +140,9 @@ const UsernamePasswordForm = ({ type, sendData }) => {
               name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
+              aria-describedby="component-error-text"
             />
+            {passwordErr && <FormHelperText id="component-error-text">Error</FormHelperText>}
             </FormControl>
             </Grid>
             <Grid item>
@@ -104,7 +153,9 @@ const UsernamePasswordForm = ({ type, sendData }) => {
               name="passwordAgain"
               value={formik.values.passwordAgain}
               onChange={formik.handleChange}
+              aria-describedby="component-error-text"
             />
+            {passwordAgainErr && <FormHelperText id="component-error-text">Error</FormHelperText>}
             </FormControl>
             </Grid>
             <Grid item>
