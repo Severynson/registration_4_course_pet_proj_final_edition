@@ -73,9 +73,9 @@ const UsernamePasswordForm = ({ type, sendData }) => {
 
   
 
-  const formik = useFormik({
+  const {handleSubmit, handleChange, values, touched, errors} = useFormik({
       initialValues: {
-      username: "",
+      login: "",
       password: "",
       passwordAgain: "",
       },
@@ -115,20 +115,19 @@ const UsernamePasswordForm = ({ type, sendData }) => {
         alignItems="center"
       >
         <Formik>
-            <Form onSubmit={formik.handleSubmit}>
+            <Form onSubmit={handleSubmit}>
                 <Grid container direction="column" alignItems="center" width="300px">
               <Grid item>
           <FormControl variant="filled">
-            <InputLabel htmlFor="username">Username</InputLabel>
+            <InputLabel htmlFor="login">Login</InputLabel>
             <FilledInput
-              id="username"
-              name="username"
-              value={formik.values.username}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+              id="login"
+              name="login"
+              value={values.login}
+              onChange={handleChange}
               aria-describedby="component-error-text"
             />
-            {formik.errors.username && <FormHelperText sx={{color: red[500]}} id="component-error-text">{formik.errors.username}</FormHelperText>}
+            {touched.login && errors.login && <FormHelperText sx={{color: red[500]}} id="component-error-text">{errors.username}</FormHelperText>}
              </FormControl>
              </Grid>
              <Grid item>
@@ -137,12 +136,11 @@ const UsernamePasswordForm = ({ type, sendData }) => {
             <FilledInput
               id="password"
               name="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+              value={values.password}
+              onChange={handleChange}
               aria-describedby="component-error-text"
             />
-            {formik.errors.password && <FormHelperText sx={{color: red[500]}} id="component-error-text">{formik.errors.password}</FormHelperText>}
+            {touched.password && errors.password && <FormHelperText sx={{color: red[500]}} id="component-error-text">{errors.password}</FormHelperText>}
             </FormControl>
             </Grid>
             <Grid item>
@@ -151,12 +149,11 @@ const UsernamePasswordForm = ({ type, sendData }) => {
             <FilledInput
               id="passwordAgain"
               name="passwordAgain"
-              value={formik.values.passwordAgain}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+              value={values.passwordAgain}
+              onChange={handleChange}
               aria-describedby="component-error-text"
             />
-            {formik.errors.passwordAgain && <FormHelperText sx={{color: red[500]}} id="component-error-text">{formik.errors.passwordAgain}</FormHelperText>}
+            {touched.passwordAgain && errors.passwordAgain && <FormHelperText sx={{color: red[500]}} id="component-error-text">{errors.passwordAgain}</FormHelperText>}
             </FormControl>
             </Grid>
             <Grid item>
