@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
+import { useMediaQuery } from "@mui/material";
 import {Fragment} from "react";
 
 const articles = [
@@ -22,6 +23,8 @@ const articles = [
 ];
 
 const Articles = () => {
+    const maxW370 = useMediaQuery("(max-width: 370px)");
+
   return (
     <Box
       bgcolor="primary.light"
@@ -38,7 +41,7 @@ const Articles = () => {
         sx={{
           position: "absolute",
           right: 20,
-          top: 5,
+          top: 3,
           fontStyle: "italic",
           color: "#fff",
         }}
@@ -49,7 +52,7 @@ const Articles = () => {
       {articles.map(({ title, article }, i) => {
         return (
           <Fragment key={i}>
-            <Typography variant="h3">
+            <Typography variant="h3" fontSize={!maxW370 ? `50px` : "39px"}>
               <DoneIcon fontSize="large" /> {title}
             </Typography>
             <Box

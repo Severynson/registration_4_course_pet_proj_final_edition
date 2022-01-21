@@ -6,17 +6,9 @@ import { useMediaQuery } from "@mui/material";
 
 
 const AfterHeader = () => {
-  const minW545 = useMediaQuery("(min-width: 545px)");
-  const maxW544 = useMediaQuery("(max-width: 544px)");
-  const maxW480 = useMediaQuery("(max-width: 480px)");
-  let typographyVariant;
-  if (minW545) {
-    typographyVariant = "h2"
-  } else if (maxW544) {
-    typographyVariant = "h3"
-  } else if (maxW480) {
-    typographyVariant = "body1"
-  }
+  const minW555 = useMediaQuery("(min-width: 555px)");
+  const maxW554 = useMediaQuery("(max-width: 554px)");
+  const maxW493 = useMediaQuery("(max-width: 493px)");
 
   return (
     <Grid
@@ -28,7 +20,7 @@ const AfterHeader = () => {
     >
       <Grid item md={6}>
         <Box sx={{ maxWidth: "500px", padding: "50px" }}>
-          <Typography variant={typographyVariant}>
+          <Typography variant="h2" sx={{fontWeight: "bold" ,fontSize: `${minW555 && "60px" || maxW493 && "40px" || maxW554 && "50px"}`}}>
             Become true professional in React{" "}
             <img height="50px" src={reactImg} alt="React icon" /> with us
           </Typography>

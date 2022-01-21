@@ -14,7 +14,7 @@ const navTextColor = grey[50];
 const navStyle = () => ({isActive}) => ({color: isActive ? "#1565c0" : "#fafafa", backgroundColor: isActive ? "#fafafa" : "", textDecoration: "none", transition: "all 0.5s", transform: isActive ? "translateY(10%)" : ""});
 
 const Header = () => {
-  const maxW480 = useMediaQuery("(max-width: 480px)");
+  const maxW700 = useMediaQuery("(max-width: 700px)");
 
   return (
     <Box>
@@ -31,7 +31,7 @@ const Header = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: navTextColor }}>
             It-incubator
           </Typography>
-          {!maxW480 && <><NavLink to="admin" style={navStyle()}>
+          {!maxW700 && <><NavLink to="admin" style={navStyle()}>
             <Button color="inherit" >Admin</Button>
           </NavLink>
           <NavLink to="registration" style={navStyle()}>
