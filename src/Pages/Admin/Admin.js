@@ -50,8 +50,8 @@ const Admin = () => {
             <Box border="2px solid black" width="400px" p="10px">
                 {item.aboutYourself}
             </Box>
-            <Box border="2px solid black" width="200px" p="10px">
-            <IconButton sx={{bgcolor: checkBoxColor, mr: "20%"}}><CheckBox /></IconButton>
+            <Box border="2px solid black" width="200px" p="10px" sx={{display: 'flex', justifyContent: 'space-evenly'}}>
+            <IconButton sx={{bgcolor: checkBoxColor}}><CheckBox /></IconButton>
             <IconButton sx={{bgcolor: deniedColor}}><DeleteForever /></IconButton>
             </Box>
             </Box>
