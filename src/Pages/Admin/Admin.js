@@ -1,4 +1,11 @@
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, Typography, IconButton } from "@mui/material";
+import { Fragment } from "react";
+import { blue, teal, red } from "@mui/material/colors";
+import {CheckBox, DeleteForever} from '@mui/icons-material';
+import React from "react";
+const  itemsBgColor = blue[200];
+const checkBoxColor = teal[500];
+const deniedColor = red[500];
 
 const DUMMY_USERLIST = [
     {
@@ -13,12 +20,42 @@ const DUMMY_USERLIST = [
 ];
 
 const Admin = () => {
-    return ( <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+    return ( <Box sx={{margin: "0 auto"}}>
+        <Grid container sx={{width: "800px" ,m: "0 auto" ,marginTop: "9%"}} columns={4} >
+        <Grid item sx={{ bgcolor: itemsBgColor}}>
+                  <Box display="flex" sx={{width: "800px"}}>
+            <Box border="2px solid black" width="100px" p="10px">
+                <Typography variant="h6" fontWeight="bold">Name</Typography>
+            </Box>
+            <Box border="2px solid black" width="100px" p="10px">
+                <Typography variant="h6" fontWeight="bold">Surname</Typography>
+            </Box>
+            <Box border="2px solid black" width="400px" p="10px"> 
+                <Typography variant="h6" fontWeight="bold">About</Typography>
+            </Box>
+            <Box border="2px solid black" width="200px" p="10px">
+            <Typography variant="h6" fontWeight="bold">Accept / Denie</Typography>
+            </Box>
+            </Box>
+             </Grid>
           {DUMMY_USERLIST.map((item, i) => (
-            <Grid item xs={2} sm={4} md={4} key={i}>
-              <p>{item.name}</p>
-            </Grid>
+              <Grid item key={i} sx={{ bgcolor: itemsBgColor}}>
+                  <Box display="flex" sx={{width: "800px" ,m: "0 auto"}}>
+            <Box border="2px solid black" width="100px" p="10px">
+                {item.name}
+            </Box>
+            <Box border="2px solid black" width="100px" p="10px">
+                {item.surname}
+            </Box>
+            <Box border="2px solid black" width="400px" p="10px">
+                {item.aboutYourself}
+            </Box>
+            <Box border="2px solid black" width="200px" p="10px">
+            <IconButton sx={{bgcolor: checkBoxColor, mr: "20%"}}><CheckBox /></IconButton>
+            <IconButton sx={{bgcolor: deniedColor}}><DeleteForever /></IconButton>
+            </Box>
+            </Box>
+             </Grid>
           ))}
         </Grid>
       </Box>);

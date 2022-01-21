@@ -8,7 +8,6 @@ let userData;
 const Registration = () => {
     const [firstStepDone, setFirstStepDone] = useState(false);
     const [secondStepDone, setSecondStepDone] = useState(false);
-    const [showAfterMessage, setShowAfterMessage] = useState(false);
 
     const addUsernameAndPassword = (inputValues) => {
         setFirstStepDone(true);
