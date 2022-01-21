@@ -9,7 +9,7 @@ const backgroundColor = blue[200];
 const imgButtonBgColor = red[300];
 const submitButtonBgColor = teal[500];
 
-const SecondStep = () => {
+const SecondStep = ({sendData}) => {
   const maxW700 = useMediaQuery("(max-width: 699px)");
   const [imageFile, setImageFile] = useState();
 
@@ -37,14 +37,7 @@ const SecondStep = () => {
       .required('A phone number is required'),
     }),
     onSubmit: (values, formikHelpers) => {
-        const formData = new FormData();
-        
-
-    imageFile.name && formData.append("myFile", imageFile, imageFile.name);
-    console.log(values);
-    //   sendData(values);
-    //   formikHelpers.resetForm();
-    console.log(formData)
+      sendData({...values, image: imageFile});
     },
   });
 

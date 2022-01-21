@@ -1,6 +1,9 @@
 import UsernamePasswordForm from "../../UI/LoginPasswordForm";
 import SecondStep from "./SecondStep/SecondStep";
+import SendingData from "./SendingData/SendingData";
 import { useState } from "react";
+
+let userData;
 
 const Registration = () => {
     const [firstStepDone, setFirstStepDone] = useState(false);
@@ -8,14 +11,20 @@ const Registration = () => {
     const [showAfterMessage, setShowAfterMessage] = useState(false);
 
     const addUsernameAndPassword = (inputValues) => {
-        console.log(inputValues)
         setFirstStepDone(true);
+        return userData = inputValues;
+    };
+
+    const addInfoAbouUser = (inputValues) => {
+        userData =  {...userData, ...inputValues}
+        setSecondStepDone(true);
     };
 
   return (
     <>
     {!firstStepDone && <UsernamePasswordForm type="registration" sendData={addUsernameAndPassword} />}
-    {firstStepDone && !secondStepDone && <SecondStep />}
+    {firstStepDone && !secondStepDone && <SecondStep sendData={addInfoAbouUser} />}
+    {firstStepDone && secondStepDone && <SendingData dataToSend={userData} />}
     </>
   );
 };
