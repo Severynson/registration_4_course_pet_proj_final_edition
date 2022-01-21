@@ -26,7 +26,7 @@ const SecondStep = () => {
     >
         <Grid container justifyContent="center" alignItems="center">
             <Grid item xs={12} sm={6} >
-      <Box sx={{ display: "flex", alignItems: "flex-end", mb: 2 }}>
+      <Box sx={{ display: "flex", alignItems: "flex-end", mb: 2, mr: 1 }}>
         <AccountCircle sx={{ color: "action.active", mr: 1, my: 0.5 }} />
         <TextField id="input-with-sx" label="Name" variant="standard" />
       </Box>
@@ -38,7 +38,7 @@ const SecondStep = () => {
       </Box>
       </Grid>
       <Grid item xs={12} sm={6}>
-      <Box sx={{ display: "flex", alignItems: "flex-end", mb: 2 }}>
+      <Box sx={{ display: "flex", alignItems: "flex-end", mb: 2, mr: 1 }}>
         <Phone sx={{ color: "action.active", mr: 1, my: 0.5 }} />
         <TextField id="input-with-sx" label="Phone" variant="standard" />
       </Box>
