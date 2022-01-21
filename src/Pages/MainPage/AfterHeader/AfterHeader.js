@@ -20,7 +20,7 @@ const AfterHeader = () => {
     >
       <Grid item md={6}>
         <Box sx={{ maxWidth: "500px", padding: "50px" }}>
-          <Typography variant="h2" sx={{fontWeight: "bold" ,fontSize: `${minW555 && "60px" || maxW493 && "40px" || maxW554 && "50px"}`}}>
+          <Typography variant="h2" sx={{fontWeight: "bold" ,fontSize: `${(minW555 && "60px") || (maxW493 && "40px") || (maxW554 && "50px")}`}}>
             Become true professional in React{" "}
             <img height="50px" src={reactImg} alt="React icon" /> with us
           </Typography>

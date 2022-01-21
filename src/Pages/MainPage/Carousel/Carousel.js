@@ -8,7 +8,6 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Translate } from "@mui/icons-material";
 
 const carouselPages = [
   {
