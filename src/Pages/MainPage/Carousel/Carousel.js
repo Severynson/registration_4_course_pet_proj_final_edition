@@ -17,7 +17,7 @@ const carouselPages = [
   },
   {
     image: ponasenkov,
-    name: "Evgeniy Ponasenkov (Just Maestro)",
+    name: "Evgeniy Ponasenkov",
     feedbackText: `Maestro gives hist best compliment's! I get learned to make the beast sites. Now I like site estetic much more than art! I lost my mind with so cool framework like React.`,
   },
   {
