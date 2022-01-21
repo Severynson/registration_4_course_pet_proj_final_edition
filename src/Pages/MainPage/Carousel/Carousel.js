@@ -216,7 +216,7 @@ const Carousel = () => {
                   </Box>
                 </Grid>
                 <Grid item xs={8} sx={{ p: "20px" }}>
-                  <Typography variant="h3" sx={{ marginBottom: "6%" }}>
+                  <Typography variant="h3" sx={{ marginBottom: "25px" }}>
                     {name}
                   </Typography>
                   <Typography variant="body1">{feedbackText}</Typography>
