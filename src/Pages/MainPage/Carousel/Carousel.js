@@ -8,6 +8,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Translate } from "@mui/icons-material";
 
 const carouselPages = [
   {
@@ -39,16 +40,16 @@ const carouselPages = [
 
 const Carousel = () => {
 
-
-  const [sliderScale, setSliderScale] = useState(1);
   const [offset, setOffset] = useState(0);
   const [showArrowBack, setShowArrowBack] = useState(true);
   const [showArrowForward, setShowArrowForward] = useState(true);
   const quantityOfSlides = carouselPages.length;
   const [sliderPosition, setSliderPosition] = useState(1);
-  const [sliderZPosition, setSliderZPosition] = useState(0);
-  const [sliderYPosition, setSliderYPosition] = useState(0);
-  const [windowWidth] = useState(window.innerWidth);
+
+
+  const [scaleValue, setScaleValue] = useState(1);
+  const [translateX, setTranslateX] = useState(0);
+  const [translateY, setTranslateY] = useState(0);
 
   const maxW300 = useMediaQuery("(max-width: 300px)");
   const maxW350 = useMediaQuery("(max-width: 350px)");
@@ -60,6 +61,9 @@ const Carousel = () => {
   const maxW650 = useMediaQuery("(max-width: 650px)");
   const maxW700 = useMediaQuery("(max-width: 700px)");
   const maxW750 = useMediaQuery("(max-width: 750px)");
+  const maxW800 = useMediaQuery("(max-width: 800px)");
+  const maxW850 = useMediaQuery("(max-width: 850px)");
+  const maxW900 = useMediaQuery("(max-width: 900px)");
 
   useEffect(() => {
     if (sliderPosition === 1) {
@@ -75,43 +79,59 @@ const Carousel = () => {
     }
   }, [sliderPosition, quantityOfSlides]);
 
-//   useEffect(() => {
-//     if (windowWidth < 950 && windowWidth >= 850) {
-//       setSliderScale(0.9);
-//     } else if (windowWidth < 850 && windowWidth >= 750) {
-//       setSliderScale(0.8);
-//     } else if (windowWidth < 750 && windowWidth >= 650) {
-//       setSliderScale(0.75);
-//     } else if (windowWidth < 650 && windowWidth >= 550) {
-//       setSliderScale(0.6);
-//     } else if (windowWidth < 550 && windowWidth >= 450) {
-//       setSliderScale(0.5);
-//     } else if (windowWidth < 450 && windowWidth >= 350) {
-//         setSliderScale(0.4)
-//     }
+  useEffect(() => {
+   if (maxW350) {
+    setScaleValue(0.35);
+    setTranslateX(95);
+    setTranslateY(95);
+   } else if (maxW400) {
+    setScaleValue(0.4);
+    setTranslateX(75);
+    setTranslateY(80);
+   } else if (maxW450) {
+    setScaleValue(0.45);
+    setTranslateX(59);
+    setTranslateY(68);
+   } else if (maxW500) {
+    setScaleValue(0.5);
+    setTranslateX(47);
+    setTranslateY(55);
+   } else if (maxW550) {
+    setScaleValue(0.55);
+    setTranslateX(36);
+    setTranslateY(43);
+   } else if (maxW600) {
+    setScaleValue(0.6);
+    setTranslateX(27.5);
+    setTranslateY(35);
+   } else if (maxW650) {
+    setScaleValue(0.7);
+    setTranslateX(21);
+    setTranslateY(25);
+   } else if (maxW700) {
+    setScaleValue(0.75);
+    setTranslateX(15);
+    setTranslateY(16);
+   } else if (maxW750) {
+    setScaleValue(0.8);
+    setTranslateX(11);
+    setTranslateY(13);
+   } else if (maxW800) {
+    setScaleValue(0.85);
+    setTranslateX(5);
+    setTranslateY(8);
+   } else if (maxW850) {
+    setScaleValue(0.9);
+    setTranslateX(2.5);
+    setTranslateY(3);
+   } else if (maxW900) {
+    setScaleValue(1);
+    setTranslateX(0);
+    setTranslateY(0);
+   }
+   
 
-//     if (windowWidth >= 350 && windowWidth < 450) {
-//       console.log("111111111");
-//       setSliderZPosition(75);
-//       setSliderYPosition(75)
-//     } else if (windowWidth >=450 && windowWidth < 500) {
-//         setSliderZPosition(47.5);
-//         setSliderYPosition(40)
-//      } else if (windowWidth >=500 && windowWidth <550) {
-//         setSliderZPosition(41);
-//         setSliderYPosition(50);
-//     } else if (windowWidth >=550 && windowWidth < 650) {
-//         setSliderZPosition(30);
-//         setSliderYPosition(30);
-//     } else if (windowWidth >=650 && windowWidth < 750) {
-//         setSliderZPosition(16.5);
-//         setSliderYPosition(20);
-//     } else if (windowWidth >=750 && windowWidth <= 850) {
-//         setSliderZPosition(7.5);
-//         setSliderYPosition(10);
-//     }
-
-//   }, [windowWidth]);
+  }, [maxW300, maxW350, maxW400, maxW450, maxW500, maxW550, maxW600, maxW650, maxW700, maxW750, maxW800, maxW850]);
 
   const slideBack = () => {
     const newPosition = offset + 800;
@@ -131,7 +151,7 @@ const Carousel = () => {
         width: "800px",
         margin: "0 auto",
         position: "relative",
-        transform: `scale(${maxW500 && "0.435"}) translate(-${maxW500 && "63"}%, -${sliderYPosition}%)`,
+        transform: `scale(${scaleValue}) translate(-${translateX}%, -${translateY}%)`,
       }}
     >
       {showArrowBack && (
