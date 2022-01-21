@@ -51,19 +51,19 @@ const Carousel = () => {
   const [translateX, setTranslateX] = useState(0);
   const [translateY, setTranslateY] = useState(0);
 
-  const maxW300 = useMediaQuery("(max-width: 300px)");
-  const maxW350 = useMediaQuery("(max-width: 350px)");
-  const maxW400 = useMediaQuery("(max-width: 400px)");
-  const maxW450 = useMediaQuery("(max-width: 450px)");
-  const maxW500 = useMediaQuery("(max-width: 500px)");
-  const maxW550 = useMediaQuery("(max-width: 550px)");
-  const maxW600 = useMediaQuery("(max-width: 600px)");
-  const maxW650 = useMediaQuery("(max-width: 650px)");
-  const maxW700 = useMediaQuery("(max-width: 700px)");
-  const maxW750 = useMediaQuery("(max-width: 750px)");
-  const maxW800 = useMediaQuery("(max-width: 800px)");
-  const maxW850 = useMediaQuery("(max-width: 850px)");
-  const maxW900 = useMediaQuery("(max-width: 900px)");
+  const maxW300 = useMediaQuery("(max-width: 299px)");
+  const maxW350 = useMediaQuery("(max-width: 349px)");
+  const maxW400 = useMediaQuery("(max-width: 399px)");
+  const maxW450 = useMediaQuery("(max-width: 449px)");
+  const maxW500 = useMediaQuery("(max-width: 499px)");
+  const maxW550 = useMediaQuery("(max-width: 549px)");
+  const maxW600 = useMediaQuery("(max-width: 599px)");
+  const maxW650 = useMediaQuery("(max-width: 649px)");
+  const maxW700 = useMediaQuery("(max-width: 699px)");
+  const maxW750 = useMediaQuery("(max-width: 749px)");
+  const maxW800 = useMediaQuery("(max-width: 799px)");
+  const maxW850 = useMediaQuery("(max-width: 849px)");
+  const maxW900 = useMediaQuery("(max-width: 899px)");
 
   useEffect(() => {
     if (sliderPosition === 1) {
