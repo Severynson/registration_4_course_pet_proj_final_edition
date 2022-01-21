@@ -4,9 +4,13 @@ import helpingEachOther from "../../../../Images/helpingEachOther.jpg";
 import writingSomething from "../../../../Images/writing-something.jpg";
 import workspace from "../../../../Images/workspace.jpg";
 import talkingAboutSomething from "../../../../Images/talkingAboutSomething.jpeg";
+import { useMediaQuery } from '@mui/material';
+
 
 const Gallery = () => {
-    return (<ImageList sx={{ width: 500, height: 450 }} cols={2}>
+  const maxW390 = useMediaQuery("(max-width: 390px)");
+
+    return (<ImageList sx={{ width: !maxW390 ? 500 : 300, height: 450 }} cols={2}>
         {itemData.map((item) => (
           <ImageListItem key={item.img}>
             <img

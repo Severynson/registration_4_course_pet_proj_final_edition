@@ -6,6 +6,7 @@ import heidegger from "../../../Images/Heidegger.jpg";
 import plato from "../../../Images/Plato.jpg";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const carouselPages = [
@@ -37,6 +38,8 @@ const carouselPages = [
 ];
 
 const Carousel = () => {
+
+
   const [sliderScale, setSliderScale] = useState(1);
   const [offset, setOffset] = useState(0);
   const [showArrowBack, setShowArrowBack] = useState(true);
@@ -47,6 +50,16 @@ const Carousel = () => {
   const [sliderYPosition, setSliderYPosition] = useState(0);
   const [windowWidth] = useState(window.innerWidth);
 
+  const maxW300 = useMediaQuery("(max-width: 300px)");
+  const maxW350 = useMediaQuery("(max-width: 350px)");
+  const maxW400 = useMediaQuery("(max-width: 400px)");
+  const maxW450 = useMediaQuery("(max-width: 450px)");
+  const maxW500 = useMediaQuery("(max-width: 500px)");
+  const maxW550 = useMediaQuery("(max-width: 550px)");
+  const maxW600 = useMediaQuery("(max-width: 600px)");
+  const maxW650 = useMediaQuery("(max-width: 650px)");
+  const maxW700 = useMediaQuery("(max-width: 700px)");
+  const maxW750 = useMediaQuery("(max-width: 750px)");
 
   useEffect(() => {
     if (sliderPosition === 1) {
@@ -62,43 +75,43 @@ const Carousel = () => {
     }
   }, [sliderPosition, quantityOfSlides]);
 
-  useEffect(() => {
-    if (windowWidth < 950 && windowWidth >= 850) {
-      setSliderScale(0.9);
-    } else if (windowWidth < 850 && windowWidth >= 750) {
-      setSliderScale(0.8);
-    } else if (windowWidth < 750 && windowWidth >= 650) {
-      setSliderScale(0.75);
-    } else if (windowWidth < 650 && windowWidth >= 550) {
-      setSliderScale(0.6);
-    } else if (windowWidth < 550 && windowWidth >= 450) {
-      setSliderScale(0.5);
-    } else if (windowWidth < 450 && windowWidth >= 350) {
-        setSliderScale(0.4)
-    }
+//   useEffect(() => {
+//     if (windowWidth < 950 && windowWidth >= 850) {
+//       setSliderScale(0.9);
+//     } else if (windowWidth < 850 && windowWidth >= 750) {
+//       setSliderScale(0.8);
+//     } else if (windowWidth < 750 && windowWidth >= 650) {
+//       setSliderScale(0.75);
+//     } else if (windowWidth < 650 && windowWidth >= 550) {
+//       setSliderScale(0.6);
+//     } else if (windowWidth < 550 && windowWidth >= 450) {
+//       setSliderScale(0.5);
+//     } else if (windowWidth < 450 && windowWidth >= 350) {
+//         setSliderScale(0.4)
+//     }
 
-    if (windowWidth >= 350 && windowWidth < 450) {
-      console.log("111111111");
-      setSliderZPosition(75);
-      setSliderYPosition(75)
-    } else if (windowWidth >=450 && windowWidth < 500) {
-        setSliderZPosition(47.5);
-        setSliderYPosition(40)
-     } else if (windowWidth >=500 && windowWidth <550) {
-        setSliderZPosition(41);
-        setSliderYPosition(50);
-    } else if (windowWidth >=550 && windowWidth < 650) {
-        setSliderZPosition(30);
-        setSliderYPosition(30);
-    } else if (windowWidth >=650 && windowWidth < 750) {
-        setSliderZPosition(16.5);
-        setSliderYPosition(20);
-    } else if (windowWidth >=750 && windowWidth <= 850) {
-        setSliderZPosition(7.5);
-        setSliderYPosition(10);
-    }
+//     if (windowWidth >= 350 && windowWidth < 450) {
+//       console.log("111111111");
+//       setSliderZPosition(75);
+//       setSliderYPosition(75)
+//     } else if (windowWidth >=450 && windowWidth < 500) {
+//         setSliderZPosition(47.5);
+//         setSliderYPosition(40)
+//      } else if (windowWidth >=500 && windowWidth <550) {
+//         setSliderZPosition(41);
+//         setSliderYPosition(50);
+//     } else if (windowWidth >=550 && windowWidth < 650) {
+//         setSliderZPosition(30);
+//         setSliderYPosition(30);
+//     } else if (windowWidth >=650 && windowWidth < 750) {
+//         setSliderZPosition(16.5);
+//         setSliderYPosition(20);
+//     } else if (windowWidth >=750 && windowWidth <= 850) {
+//         setSliderZPosition(7.5);
+//         setSliderYPosition(10);
+//     }
 
-  }, [windowWidth]);
+//   }, [windowWidth]);
 
   const slideBack = () => {
     const newPosition = offset + 800;
@@ -118,7 +131,7 @@ const Carousel = () => {
         width: "800px",
         margin: "0 auto",
         position: "relative",
-        transform: `scale(${sliderScale}) translate(-${sliderZPosition}%, -${sliderYPosition}%)`,
+        transform: `scale(${maxW500 && "0.435"}) translate(-${maxW500 && "63"}%, -${sliderYPosition}%)`,
       }}
     >
       {showArrowBack && (

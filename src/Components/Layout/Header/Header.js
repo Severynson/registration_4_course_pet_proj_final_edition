@@ -8,11 +8,14 @@ import HomeIcon from '@mui/icons-material/Home';
 import Box from "@mui/material/Box";
 import { grey } from "@mui/material/colors";
 import { NavLink } from "react-router-dom";
+import { useMediaQuery } from "@mui/material";
 const navTextColor = grey[50];
 
 const navStyle = () => ({isActive}) => ({color: isActive ? "#1565c0" : "#fafafa", backgroundColor: isActive ? "#fafafa" : "", textDecoration: "none", transition: "all 0.5s", transform: isActive ? "translateY(10%)" : ""});
 
 const Header = () => {
+  const maxW480 = useMediaQuery("(max-width: 480px)");
+
   return (
     <Box>
       <AppBar position="static">
@@ -28,7 +31,7 @@ const Header = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: navTextColor }}>
             It-incubator
           </Typography>
-          <NavLink to="admin" style={navStyle()}>
+          {!maxW480 && <><NavLink to="admin" style={navStyle()}>
             <Button color="inherit" >Admin</Button>
           </NavLink>
           <NavLink to="registration" style={navStyle()}>
@@ -36,7 +39,7 @@ const Header = () => {
           </NavLink>
           <NavLink to="login" style={navStyle()}>
             <Button color="inherit" >Login</Button>
-          </NavLink>
+          </NavLink></>}
           <NavLink to="mainpage" style={navStyle()}>
             <Button color="inherit" ><HomeIcon /></Button>
           </NavLink>
