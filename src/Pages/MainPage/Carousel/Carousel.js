@@ -130,7 +130,7 @@ const Carousel = () => {
    }
    
 
-  }, [maxW300, maxW350, maxW400, maxW450, maxW500, maxW550, maxW600, maxW650, maxW700, maxW750, maxW800, maxW850]);
+  }, [maxW300, maxW350, maxW400, maxW450, maxW500, maxW550, maxW600, maxW650, maxW700, maxW750, maxW800, maxW850, maxW900]);
 
   const slideBack = () => {
     const newPosition = offset + 800;
