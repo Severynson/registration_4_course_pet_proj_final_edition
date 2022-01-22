@@ -1,9 +1,11 @@
 import { Grid, Box, Typography, IconButton } from "@mui/material";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { blue, teal, red } from "@mui/material/colors";
 import { CheckBox, DeleteForever } from "@mui/icons-material";
 import React from "react";
 import { useMediaQuery } from "@mui/material";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
 const itemsBgColor = blue[200];
 const checkBoxColor = teal[500];
 const deniedColor = red[500];
@@ -29,6 +31,8 @@ const DUMMY_USERLIST = [
 ];
 
 const Admin = () => {
+    const [users, setUsers] = useState([]);
+    const usersCollectionRef = collection(db, "users");
   const [containerWidth, setContainerWidth] = useState(800);
   const [typographyFont, setTypographyFont] = useState(20);
   const [textFZ, setTextFZ] = useState(18);
@@ -38,6 +42,17 @@ const Admin = () => {
   const maxW700 = useMediaQuery("(max-width: 700px)");
   const maxW800 = useMediaQuery("(max-width: 800px)");
   const minW800 = useMediaQuery("(min-width: 800px)");
+
+  useEffect(() => {
+      const getUsers = async() => {
+        const data = await getDocs(usersCollectionRef);
+        console.log(data);
+        setUsers(data.docs.map((doc) => ({
+            ...doc.data(), id: doc.id
+        })))
+      };
+      getUsers();
+  }, [])
 
   useEffect(() => {
     if (maxW400) {
@@ -114,7 +129,7 @@ const Admin = () => {
             </Box>
           </Box>
         </Grid>
-        {DUMMY_USERLIST.map((item, i) => (
+        {users.map((item, i) => (
           <Grid item key={i} sx={{ bgcolor: itemsBgColor }}>
             <Box
               display="flex"

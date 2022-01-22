@@ -20,7 +20,7 @@ const SecondStep = ({sendData}) => {
       instagram: "",
       phone: "",
       aboutYourself: "",
-      image: [],
+    //   image: [],
     },
     validationSchema: Yup.object({
       name: Yup.string()
