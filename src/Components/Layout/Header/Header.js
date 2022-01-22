@@ -54,7 +54,7 @@ const Header = () => {
   );
 
   if (navBar) return reactDom.createPortal(
-  <Box sx={{position: "fixed", top: "50%", left: "50%", width: "100%", height: "100vh", bgcolor: "#1565c0", opacity: "1", transition: "all 1s", transform: "translate(-50%, -50%)", display: "flex", justifyContent: "center", alignItems: "center"}}>
+  <Box sx={{position: "fixed", top: "50%", left: "50%", width: "100%", height: "100vh", bgcolor: "#1565c0", transition: "all 1s", transform: "translate(-50%, -50%)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: "100"}}>
     <Box sx={{ display: "flex" ,flexDirection: 'column', justifyContent: "center", alignItems: "center" }}>
     <Button
         size="large"
@@ -107,7 +107,5 @@ const Header = () => {
     </Box>
   </Box>, document.getElementById('portal'));
 }
-
-
 
 export default Header;
