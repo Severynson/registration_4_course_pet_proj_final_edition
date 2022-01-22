@@ -4,6 +4,7 @@ import Registration from "./Pages/Registration/Registration";
 import LogIn from "./Pages/LogIn/LogIn";
 import Admin from "./Pages/Admin/Admin";
 import { Route, Routes, Navigate } from "react-router-dom";
+import "./firebase.js";
 
 
 function App() {

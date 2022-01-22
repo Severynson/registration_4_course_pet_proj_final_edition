@@ -9,7 +9,7 @@ import { grey } from "@mui/material/colors";
 import { NavLink, useNavigate } from "react-router-dom";
 import reactDom from "react-dom";
 import { useMediaQuery } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 const navTextColor = grey[50];
 
 const navStyle = () => ({isActive}) => ({color: isActive ? "#1565c0" : "#fafafa", backgroundColor: isActive ? "#fafafa" : "", textDecoration: "none", transition: "all 0.5s", transform: isActive ? "translateY(10%)" : ""});
