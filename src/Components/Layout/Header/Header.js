@@ -9,15 +9,19 @@ import Box from "@mui/material/Box";
 import { grey } from "@mui/material/colors";
 import { NavLink } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
+import { useState } from "react";
 const navTextColor = grey[50];
 
 const navStyle = () => ({isActive}) => ({color: isActive ? "#1565c0" : "#fafafa", backgroundColor: isActive ? "#fafafa" : "", textDecoration: "none", transition: "all 0.5s", transform: isActive ? "translateY(10%)" : ""});
 
 const Header = () => {
   const maxW700 = useMediaQuery("(max-width: 700px)");
+  const [navBar, setNavBar] = useState(false);
+
 
   return (
     <Box>
+      {/* <Box sx={{position: "fixed", top: "50%", left: "50%", width: "100vh", height: "100vh", bgcolor: "#1565c0", opacity: "0", transition: "all 1s", transform: "translate(-50%, -50%)"}}>Home</Box> */}
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -25,6 +29,7 @@ const Header = () => {
             edge="start"
             aria-label="menu"
             sx={{ mr: 2, color: navTextColor }}
+            onClick={() => setNavBar((prevState => !prevState))}
           >
             <MenuIcon />
           </IconButton>
