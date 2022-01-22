@@ -20,7 +20,7 @@ const backgroundColor = blue[200];
 const hulkData = [hulk, "After course"];
 const flandersData = [flanders, "Before course"];
 
-const LoginPasswordForm = ({ type, sendData }) => {
+const EmailPasswordForm = ({ type, sendData }) => {
   const [isRegistration] = useState(
     type === "registration" ? true : false
   );
@@ -40,13 +40,12 @@ const LoginPasswordForm = ({ type, sendData }) => {
 
   const { handleSubmit, handleChange, values, touched, errors } = useFormik({
     initialValues: {
-      login: "",
+      email: "",
       password: "",
       passwordAgain: "",
     },
     validationSchema: Yup.object({
-      login: Yup.string()
-        .min(5, "Must be 5 characters or more")
+      email: Yup.string().email("Must be 5 characters or more")
         .required("Required"),
       password: Yup.string()
         .min(6)
@@ -57,8 +56,8 @@ const LoginPasswordForm = ({ type, sendData }) => {
         Yup.string().oneOf([Yup.ref("password")], "Passwords are not matching").required("Required"),
     }),
     onSubmit: (values, formikHelpers) => {
-      const {login, password} = values;
-      const dataToSend = {login, password};
+      const {email, password} = values;
+      const dataToSend = {email, password};
       sendData(dataToSend);
       formikHelpers.resetForm();
     },
@@ -108,20 +107,20 @@ const LoginPasswordForm = ({ type, sendData }) => {
             >
               <Grid item>
                 <FormControl variant="filled">
-                  <InputLabel htmlFor="login">Login</InputLabel>
+                  <InputLabel htmlFor="email">Email</InputLabel>
                   <FilledInput
-                    id="login"
-                    name="login"
-                    value={values.login}
+                    id="email"
+                    name="email"
+                    value={values.email}
                     onChange={handleChange}
                     aria-describedby="component-error-text"
                   />
-                  {touched.login && errors.login && (
+                  {touched.email && errors.email && (
                     <FormHelperText
                       sx={{ color: red[500] }}
                       id="component-error-text"
                     >
-                      {errors.login}
+                      {errors.email}
                     </FormHelperText>
                   )}
                 </FormControl>
@@ -190,4 +189,4 @@ const LoginPasswordForm = ({ type, sendData }) => {
   );
 };
 
-export default LoginPasswordForm;
+export default EmailPasswordForm;
