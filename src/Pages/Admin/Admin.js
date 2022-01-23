@@ -1,4 +1,4 @@
-import { Grid, Box, Typography, IconButton } from "@mui/material";
+import { Grid, Box, Typography, IconButton, AppBar, Toolbar, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { blue, teal, red } from "@mui/material/colors";
 import { CheckBox, DeleteForever } from "@mui/icons-material";
@@ -55,22 +55,26 @@ const DUMMY_USERLIST = [
   };
 
   const getUsers = async () => {
-      const data = await getDocs(usersCollectionRef);
-      const users = data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
+    const data = await getDocs(usersCollectionRef);
+    const users = data.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    return users;
+  };
 
+  const getUsersWithSomeStatus = async (acceptionStatus) => {
+        const users = await getUsers();
       let unwatchedUsers = [];
       users.forEach((user) => {
-        if (user.acceptionStatus === "unwatched yet")
+        if (user.acceptionStatus === acceptionStatus)
           unwatchedUsers.push({ ...user });
       });
       setUsers(unwatchedUsers);
     };
 
   useEffect(() => {
-    getUsers();
+    getUsersWithSomeStatus("unwatched yet");
   }, []);
 
   useEffect(() => {
@@ -108,6 +112,15 @@ const DUMMY_USERLIST = [
         sx={{ width: `${containerWidth}px`, m: "0 auto", marginTop: "9%" }}
         columns={4}
       >
+          <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar sx={{display: "flex", justifyContent: 'space-evenly'}}>
+          <Button onClick={() => getUsersWithSomeStatus("unwatched yet")} color="inherit" size="large">Unwatched</Button>
+          <Button onClick={() => getUsersWithSomeStatus("accepted")} color="inherit" size="large">Accepted</Button>
+          <Button onClick={() => getUsersWithSomeStatus("denied")} color="inherit" size="large">Denied</Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
         <Grid item sx={{ bgcolor: itemsBgColor }}>
           <Box display="flex" sx={{ width: `${containerWidth}px` }}>
             <Box
