@@ -15,4 +15,4 @@ export const userSlice = createSlice({
     }
 });
 
-export const userAction = userSlice.actions;
+export const userActions = userSlice.actions;

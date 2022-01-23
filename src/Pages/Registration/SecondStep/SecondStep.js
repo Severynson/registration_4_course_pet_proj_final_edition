@@ -4,14 +4,12 @@ import { blue, red, teal } from "@mui/material/colors";
 import { useMediaQuery } from "@mui/material";
 import { Formik, Form, useFormik } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
 const backgroundColor = blue[200];
 const imgButtonBgColor = red[300];
 const submitButtonBgColor = teal[500];
 
 const SecondStep = ({sendData}) => {
   const maxW700 = useMediaQuery("(max-width: 699px)");
-  const [imageFile, setImageFile] = useState();
 
   const { handleSubmit, handleChange, values, touched, errors } = useFormik({
     initialValues: {
@@ -20,7 +18,6 @@ const SecondStep = ({sendData}) => {
       instagram: "",
       phone: "",
       aboutYourself: "",
-    //   image: [],
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -37,8 +34,7 @@ const SecondStep = ({sendData}) => {
       .required('A phone number is required'),
     }),
     onSubmit: (values, formikHelpers) => {
-      sendData({...values
-        // , image: imageFile
+      sendData({...values, acceptionStatus: "Unwatched"
     });
     },
   });
@@ -89,7 +85,7 @@ const SecondStep = ({sendData}) => {
                       onChange={handleChange} label="Surname" variant="standard" />
       </Box>
       {(
-        //   touched.surname && errors.surname &&
+          touched.surname && errors.surname &&
                     <FormHelperText
                       sx={{ color: red[500] }}
                       id="component-error-text"
@@ -107,7 +103,7 @@ const SecondStep = ({sendData}) => {
                       onChange={handleChange} label="Phone" variant="standard" />
       </Box>
       {(
-        //   touched.phone && errors.phone &&
+          touched.phone && errors.phone &&
                     <FormHelperText
                       sx={{ color: red[500] }}
                       id="component-error-text"
@@ -137,7 +133,6 @@ const SecondStep = ({sendData}) => {
         style={{ display: "none" }}
         id="raised-button-file"
         name="raised-button-file"
-        // onChange={(e) =>   setImageFile(e.target.files[0])}
         multiple
         type="file"
       />

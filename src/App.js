@@ -5,6 +5,7 @@ import LogIn from "./Pages/LogIn/LogIn";
 import Admin from "./Pages/Admin/Admin";
 import { Route, Routes, Navigate } from "react-router-dom";
 import "./firebase.js";
+import AccountCabinet from "./Pages/AccountCabinet/AccountCabinet";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="registration" element={<Registration />} />
         <Route path="login" element={<LogIn />} />
         <Route path="admin" element={<Admin /> } />
+        <Route path="accountCabinet" element={<AccountCabinet />} />
         </Route>
       </Routes>
     </>
