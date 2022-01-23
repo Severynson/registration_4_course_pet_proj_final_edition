@@ -40,7 +40,7 @@ const Header = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: navTextColor }}>
             It-incubator
           </Typography>
-          {!maxW700 && <><NavLink to="admin" style={navStyle()}>
+          {!userIsLogedIn && !maxW700 && <><NavLink to="admin" style={navStyle()}>
             <Button color="inherit" >Admin</Button>
           </NavLink>
           <NavLink to="registration" style={navStyle()}>
@@ -52,9 +52,9 @@ const Header = () => {
           {userIsLogedIn && !maxW700 && <NavLink  to="mainpage" style={navStyle()}>
             <Button color="inherit" onClick={() => dispatch(userActions.logOut())} >Logout</Button>
           </NavLink>}
-          <NavLink to="mainpage" style={navStyle()}>
+          {!userIsLogedIn && <NavLink to="mainpage" style={navStyle()}>
             <Button color="inherit" ><Home /></Button>
-          </NavLink>
+          </NavLink>}
         </Toolbar>
       </AppBar>
     </Box>
@@ -63,7 +63,7 @@ const Header = () => {
   if (navBar) return reactDom.createPortal(
   <Box sx={{position: "fixed", top: "50%", left: "50%", width: "100%", height: "100vh", bgcolor: "#1565c0", transition: "all 1s", transform: "translate(-50%, -50%)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: "100"}}>
     <Box sx={{ display: "flex" ,flexDirection: 'column', justifyContent: "center", alignItems: "center" }}>
-    <Button
+    {!userIsLogedIn && <Button
         size="large"
         variant="outlined"
         endIcon={<Home />}
@@ -74,7 +74,7 @@ const Header = () => {
         }}
       >
         Homepage
-      </Button>
+      </Button>}
     {! userIsLogedIn ? <Button
         size="large"
         variant="outlined"
@@ -102,7 +102,7 @@ const Header = () => {
         Logout
       </Button>
       }
-    <Button
+    {!userIsLogedIn && <><Button
         size="large"
         variant="outlined"
         endIcon={<PersonAdd />}
@@ -125,7 +125,7 @@ const Header = () => {
         }}
       >
         Admin mod
-      </Button>
+      </Button></>}
     </Box>
   </Box>, document.getElementById('portal'));
 }
