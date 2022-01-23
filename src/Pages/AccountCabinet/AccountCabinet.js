@@ -7,9 +7,10 @@ const backgroundColor = blue[200];
 const AccountCabinet = () => {
     const dispatch = useDispatch();
     const accountStatus = useSelector((state) => state.user.acceptionStatus);
+    console.log(accountStatus)
 
     return (<Box m="0 auto" mt="9%" width="400px" height="120px" sx={{bgcolor: backgroundColor, textAlign: "center", borderRadius: "15px"}} >
-        <Typography p="17px" variant="h4">Acception status: Unwatched yet</Typography>
+        <Typography p="17px" variant="h4">Acception status: {accountStatus}</Typography>
         <Button
         size="large"
         variant="outlined"

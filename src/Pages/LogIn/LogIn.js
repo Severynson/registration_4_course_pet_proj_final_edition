@@ -24,12 +24,9 @@ const LogIn = () => {
 
     const handleLoginAndPassword = async (e) => {
         const {email, password} = e;
-        console.log(e);
-        const u = users.find(item => item.email === email && item.password === password);
-        console.log(users)
-        console.log(u)
-        if (u !== undefined) {
-            dispatch(userActions.logIn(u));
+        const isUserExist = users.find(item => item.email === email && item.password === password);
+        if (isUserExist !== undefined) {
+            dispatch(userActions.logIn(isUserExist));
             navigate("/accountCabinet")
         } else {
             alert("Something was writen uncorrect!");
