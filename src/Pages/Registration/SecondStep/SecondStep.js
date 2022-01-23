@@ -37,7 +37,9 @@ const SecondStep = ({sendData}) => {
       .required('A phone number is required'),
     }),
     onSubmit: (values, formikHelpers) => {
-      sendData({...values, image: imageFile});
+      sendData({...values
+        // , image: imageFile
+    });
     },
   });
 
@@ -135,7 +137,7 @@ const SecondStep = ({sendData}) => {
         style={{ display: "none" }}
         id="raised-button-file"
         name="raised-button-file"
-        onChange={(e) => setImageFile(e.target.files[0])}
+        // onChange={(e) =>   setImageFile(e.target.files[0])}
         multiple
         type="file"
       />

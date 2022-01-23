@@ -26,7 +26,7 @@ const Registration = () => {
 
     const addInfoAbouUser = async(inputValues) => {
         userData =  {...userData, ...inputValues}
-        addDoc()
+        await addDoc(usersCollectionRef, userData);
         setSecondStepDone(true);
     };
 
