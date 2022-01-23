@@ -75,7 +75,7 @@ const Header = () => {
       >
         Homepage
       </Button>
-    <Button
+    {! userIsLogedIn ? <Button
         size="large"
         variant="outlined"
         endIcon={<Person />}
@@ -86,7 +86,22 @@ const Header = () => {
         }}
       >
         Log In
+      </Button> 
+      :
+       <Button
+        size="large"
+        variant="outlined"
+        endIcon={<Person />}
+        sx={{ m: 2, bgcolor: "#fff", width: "300px" }}
+        onClick={() => {
+          navigate("/mainpage");
+          dispatch(userActions.logOut());
+          setNavBar(prevState => !prevState);
+        }}
+      >
+        Logout
       </Button>
+      }
     <Button
         size="large"
         variant="outlined"
