@@ -67,12 +67,12 @@ const Admin = () => {
   useEffect(() => {
     if (maxW400) {
       setContainerWidth(300);
-      setTypographyFont(10);
-      setTextFZ(10);
+      setTypographyFont(6);
+      setTextFZ(6);
     } else if (maxW500) {
       setContainerWidth(400);
-      setTypographyFont(12);
-      setTextFZ(11);
+      setTypographyFont(9);
+      setTextFZ(9);
     } else if (maxW600) {
       setContainerWidth(500);
       setTypographyFont(12);
