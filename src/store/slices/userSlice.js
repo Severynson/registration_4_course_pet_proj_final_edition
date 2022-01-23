@@ -16,13 +16,24 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         logIn(state, action) {
-            // console.log(action.payload);
-            // state = action.payload; 
-            // console.log(state);
             state.name = action.payload.name;
+            state.surname = action.payload.surname;
+            state.email = action.payload.email;
+            state.password = action.payload.password;
+            state.instagram = action.payload.instagram;
+            state.phone = action.payload.phone;
+            state.aboutYourself = action.payload.aboutYourself;
+            state.acceptionStatus = action.payload.acceptionStatus;
         },
         logOut(state) {
-            // state = initialState;
+            state.name = null;
+            state.surname = null;
+            state.email = null;
+            state.password = null;
+            state.instagram = null;
+            state.phone = null;
+            state.aboutYourself = null;
+            state.acceptionStatus = null;
         },
     }
 });

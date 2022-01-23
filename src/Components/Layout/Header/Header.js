@@ -10,11 +10,15 @@ import { NavLink, useNavigate } from "react-router-dom";
 import reactDom from "react-dom";
 import { useMediaQuery } from "@mui/material";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { userActions } from "../../../store/slices/userSlice";
 const navTextColor = grey[50];
 
 const navStyle = () => ({isActive}) => ({color: isActive ? "#1565c0" : "#fafafa", backgroundColor: isActive ? "#fafafa" : "", textDecoration: "none", transition: "all 0.5s", transform: isActive ? "translateY(10%)" : ""});
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const userIsLogedIn = useSelector((state) => state.user.acceptionStatus);
   const navigate = useNavigate();
   const maxW700 = useMediaQuery("(max-width: 700px)");
   const [navBar, setNavBar] = useState(false);
@@ -41,10 +45,13 @@ const Header = () => {
           </NavLink>
           <NavLink to="registration" style={navStyle()}>
             <Button color="inherit" >Registration</Button>
-          </NavLink>
-          <NavLink to="login" style={navStyle()}>
-            <Button color="inherit" >Login</Button>
           </NavLink></>}
+          {!userIsLogedIn && !maxW700 && <NavLink to="login" style={navStyle()}>
+            <Button color="inherit" >Login</Button>
+          </NavLink>}
+          {userIsLogedIn && !maxW700 && <NavLink  to="mainpage" style={navStyle()}>
+            <Button color="inherit" onClick={() => dispatch(userActions.logOut())} >Logout</Button>
+          </NavLink>}
           <NavLink to="mainpage" style={navStyle()}>
             <Button color="inherit" ><Home /></Button>
           </NavLink>
