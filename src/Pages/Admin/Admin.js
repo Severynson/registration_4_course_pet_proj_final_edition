@@ -4,7 +4,7 @@ import { blue, teal, red } from "@mui/material/colors";
 import { CheckBox, DeleteForever } from "@mui/icons-material";
 import React from "react";
 import { useMediaQuery } from "@mui/material";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase";
 const itemsBgColor = blue[200];
 const checkBoxColor = teal[500];
@@ -44,7 +44,14 @@ const Admin = () => {
   const minW800 = useMediaQuery("(min-width: 800px)");
 
   const updateUser = async(id, acceptOrDenie) => {
-    console.log(id, acceptOrDenie)
+    console.log(id, acceptOrDenie);
+    const userDoc = doc(db, "users", id);
+    if (acceptOrDenie === "accept") {
+       await userDoc(userDoc, {acceptionStatus: "accepted"});
+    } else {
+      await updateDoc(userDoc, {acceptionStatus: "denied"});
+    }
+    
   };
 
   useEffect(() => {
