@@ -32,6 +32,7 @@ const DUMMY_USERLIST = [
 
   const Admin = () => {
   const [users, setUsers] = useState([]);
+  const [typeOfUsers, setTypeOfUsers] = useState("unwatched yet");
   const usersCollectionRef = collection(db, "users");
   const [containerWidth, setContainerWidth] = useState(800);
   const [typographyFont, setTypographyFont] = useState(20);
@@ -52,6 +53,7 @@ const DUMMY_USERLIST = [
       await updateDoc(userDoc, { acceptionStatus: "denied" });
     }
     getUsers();
+    getUsersWithSomeStatus(typeOfUsers);
   };
 
   const getUsers = async () => {
@@ -74,7 +76,7 @@ const DUMMY_USERLIST = [
     };
 
   useEffect(() => {
-    getUsersWithSomeStatus("unwatched yet");
+    getUsersWithSomeStatus(typeOfUsers);
   }, []);
 
   useEffect(() => {
@@ -115,9 +117,15 @@ const DUMMY_USERLIST = [
           <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar sx={{display: "flex", justifyContent: 'space-evenly'}}>
-          <Button onClick={() => getUsersWithSomeStatus("unwatched yet")} color="inherit" size="large">Unwatched</Button>
-          <Button onClick={() => getUsersWithSomeStatus("accepted")} color="inherit" size="large">Accepted</Button>
-          <Button onClick={() => getUsersWithSomeStatus("denied")} color="inherit" size="large">Denied</Button>
+          <Button onClick={() => {
+              setTypeOfUsers("unwatched yet")
+              getUsersWithSomeStatus("unwatched yet")}} color="inherit" size="large">Unwatched</Button>
+          <Button onClick={() => {
+              setTypeOfUsers("accepted")
+              getUsersWithSomeStatus("accepted")}} color="inherit" size="large">Accepted</Button>
+          <Button onClick={() => {
+              setTypeOfUsers("denied")
+              getUsersWithSomeStatus("denied")}} color="inherit" size="large">Denied</Button>
         </Toolbar>
       </AppBar>
     </Box>
