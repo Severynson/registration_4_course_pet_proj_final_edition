@@ -30,9 +30,8 @@ const DUMMY_USERLIST = [
   },
 ];
 
-const Admin = () => {
+  const Admin = () => {
   const [users, setUsers] = useState([]);
-  const [wasSomeUserPrinted, setWasSomeUserPrinted] = useState(false);
   const usersCollectionRef = collection(db, "users");
   const [containerWidth, setContainerWidth] = useState(800);
   const [typographyFont, setTypographyFont] = useState(20);
@@ -52,31 +51,25 @@ const Admin = () => {
     } else {
       await updateDoc(userDoc, { acceptionStatus: "denied" });
     }
+    getUsers();
   };
 
-  useEffect(() => {
-    const getUsers = async () => {
+  const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
-      console.log(data);
+      const users = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
 
-      setUsers(
-        data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
-      );
-
-      const unwatchedUsers = users.map((user) => {
-        console.log(user.acceptionStatus);
-        console.log(users);
-        if (
-          user.acceptionStatus !== "accepted" ||
-          user.acceptionStatus !== "denied"
-        )
-          return user;
+      let unwatchedUsers = [];
+      users.forEach((user) => {
+        if (user.acceptionStatus === "unwatched yet")
+          unwatchedUsers.push({ ...user });
       });
       setUsers(unwatchedUsers);
     };
+
+  useEffect(() => {
     getUsers();
   }, []);
 
@@ -155,73 +148,73 @@ const Admin = () => {
             </Box>
           </Box>
         </Grid>
-        {users.map(
-          ({ name, surname, aboutYourself, id, acceptionStatus }, i) => {
-            return (
-              <Grid item key={i} sx={{ bgcolor: itemsBgColor }}>
+        {users.map(({ name, surname, aboutYourself, id }, i) => {
+          return (
+            <Grid item key={i} sx={{ bgcolor: itemsBgColor }}>
+              <Box
+                display="flex"
+                sx={{ width: `${containerWidth}px`, m: "0 auto" }}
+              >
                 <Box
-                  display="flex"
-                  sx={{ width: `${containerWidth}px`, m: "0 auto" }}
+                  border="2px solid black"
+                  sx={{ width: `${containerWidth / 8}px`, fontSize: textFZ }}
+                  p="10px"
                 >
-                  <Box
-                    border="2px solid black"
-                    sx={{ width: `${containerWidth / 8}px`, fontSize: textFZ }}
-                    p="10px"
-                  >
-                    {name}
-                  </Box>
-                  <Box
-                    border="2px solid black"
-                    sx={{ width: `${containerWidth / 8}px`, fontSize: textFZ }}
-                    p="10px"
-                  >
-                    {surname}
-                  </Box>
-                  <Box
-                    border="2px solid black"
-                    sx={{ width: `${containerWidth / 2}px`, fontSize: textFZ }}
-                    p="10px"
-                  >
-                    {aboutYourself}
-                  </Box>
-                  <Box
-                    border="2px solid black"
-                    sx={{
-                      width: `${containerWidth / 4}px`,
-                      display: "flex",
-                      justifyContent: "space-evenly",
-                    }}
-                    p="10px"
-                  >
-                    <IconButton
-                      onClick={() => updateUser(id, "accept")}
-                      sx={{
-                        bgcolor: checkBoxColor,
-                        width: `${containerWidth / 17}px`,
-                        height: `${containerWidth / 17}px`,
-                      }}
-                    >
-                      <CheckBox />
-                    </IconButton>
-                    <IconButton
-                      onClick={() => updateUser(id, "denie")}
-                      sx={{
-                        bgcolor: deniedColor,
-                        width: `${containerWidth / 17}px`,
-                        height: `${containerWidth / 17}px`,
-                      }}
-                    >
-                      <DeleteForever />
-                    </IconButton>
-                  </Box>
+                  {name}
                 </Box>
-              </Grid>
-            );
-          }
-        )}
-        {users && (
+                <Box
+                  border="2px solid black"
+                  sx={{ width: `${containerWidth / 8}px`, fontSize: textFZ }}
+                  p="10px"
+                >
+                  {surname}
+                </Box>
+                <Box
+                  border="2px solid black"
+                  sx={{ width: `${containerWidth / 2}px`, fontSize: textFZ }}
+                  p="10px"
+                >
+                  {aboutYourself}
+                </Box>
+                <Box
+                  border="2px solid black"
+                  sx={{
+                    width: `${containerWidth / 4}px`,
+                    display: "flex",
+                    justifyContent: "space-evenly",
+                  }}
+                  p="10px"
+                >
+                  <IconButton
+                    onClick={() => updateUser(id, "accept")}
+                    sx={{
+                      bgcolor: checkBoxColor,
+                      width: `${containerWidth / 17}px`,
+                      height: `${containerWidth / 17}px`,
+                    }}
+                  >
+                    <CheckBox />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => updateUser(id, "denie")}
+                    sx={{
+                      bgcolor: deniedColor,
+                      width: `${containerWidth / 17}px`,
+                      height: `${containerWidth / 17}px`,
+                    }}
+                  >
+                    <DeleteForever />
+                  </IconButton>
+                </Box>
+              </Box>
+            </Grid>
+          );
+        })}
+        {users.length === 0 && (
           <Box sx={{ bgcolor: itemsBgColor, width: containerWidth, p: 3 }}>
-            <Typography textAlign="center" variant="h4">No unwatched requests</Typography>
+            <Typography textAlign="center" variant="h4">
+              No unwatched requests
+            </Typography>
           </Box>
         )}
       </Grid>
