@@ -47,7 +47,7 @@ const Admin = () => {
     console.log(id, acceptOrDenie);
     const userDoc = doc(db, "users", id);
     if (acceptOrDenie === "accept") {
-       await userDoc(userDoc, {acceptionStatus: "accepted"});
+       await updateDoc(userDoc, {acceptionStatus: "accepted"});
     } else {
       await updateDoc(userDoc, {acceptionStatus: "denied"});
     }
@@ -140,7 +140,7 @@ const Admin = () => {
           </Box>
         </Grid>
         {users.map(({name, surname, aboutYourself, id, acceptionStatus}, i) => {
-            if (acceptionStatus === "accepted" || acceptionStatus === "denied")
+            if (acceptionStatus === "accepted" || acceptionStatus === "denied") return;
            return (<Grid item key={i} sx={{ bgcolor: itemsBgColor }}>
             <Box
               display="flex"
