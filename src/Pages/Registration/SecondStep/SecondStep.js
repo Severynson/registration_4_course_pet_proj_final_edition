@@ -34,7 +34,7 @@ const SecondStep = ({sendData}) => {
       .required('A phone number is required'),
     }),
     onSubmit: (values, formikHelpers) => {
-      sendData({...values, acceptionStatus: "Unwatched"
+      sendData({...values, acceptionStatus: "Unwatched yet"
     });
     },
   });
