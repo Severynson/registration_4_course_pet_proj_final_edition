@@ -51,7 +51,6 @@ const Admin = () => {
     } else {
       await updateDoc(userDoc, {acceptionStatus: "denied"});
     }
-    
   };
 
   useEffect(() => {
@@ -140,8 +139,9 @@ const Admin = () => {
             </Box>
           </Box>
         </Grid>
-        {users.map(({name, surname, aboutYourself, id}, i) => (
-          <Grid item key={i} sx={{ bgcolor: itemsBgColor }}>
+        {users.map(({name, surname, aboutYourself, id, acceptionStatus}, i) => {
+            if (acceptionStatus === "accepted" || acceptionStatus === "denied")
+           return (<Grid item key={i} sx={{ bgcolor: itemsBgColor }}>
             <Box
               display="flex"
               sx={{ width: `${containerWidth}px`, m: "0 auto" }}
@@ -184,8 +184,8 @@ const Admin = () => {
                 </IconButton>
               </Box>
             </Box>
-          </Grid>
-        ))}
+          </Grid>);
+        })}
       </Grid>
     </Box>
   );
