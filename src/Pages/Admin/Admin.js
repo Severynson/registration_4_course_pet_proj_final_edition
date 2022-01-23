@@ -43,6 +43,10 @@ const Admin = () => {
   const maxW800 = useMediaQuery("(max-width: 800px)");
   const minW800 = useMediaQuery("(min-width: 800px)");
 
+  const updateUser = async(id, acceptOrDenie) => {
+    console.log(id, acceptOrDenie)
+  };
+
   useEffect(() => {
       const getUsers = async() => {
         const data = await getDocs(usersCollectionRef);
@@ -129,7 +133,7 @@ const Admin = () => {
             </Box>
           </Box>
         </Grid>
-        {users.map((item, i) => (
+        {users.map(({name, surname, aboutYourself, id}, i) => (
           <Grid item key={i} sx={{ bgcolor: itemsBgColor }}>
             <Box
               display="flex"
@@ -140,21 +144,21 @@ const Admin = () => {
                 sx={{ width: `${containerWidth / 8}px`, fontSize: textFZ }}
                 p="10px"
               >
-                {item.name}
+                {name}
               </Box>
               <Box
                 border="2px solid black"
                 sx={{ width: `${containerWidth / 8}px`, fontSize: textFZ }}
                 p="10px"
               >
-                {item.surname}
+                {surname}
               </Box>
               <Box
                 border="2px solid black"
                 sx={{ width: `${containerWidth / 2}px`, fontSize: textFZ }}
                 p="10px"
               >
-                {item.aboutYourself}
+                {aboutYourself}
               </Box>
               <Box
                 border="2px solid black"
@@ -165,10 +169,10 @@ const Admin = () => {
                 }}
                 p="10px"
               >
-                <IconButton sx={{ bgcolor: checkBoxColor, width: `${containerWidth / 17}px`, height: `${containerWidth / 17}px` }}>
+                <IconButton onClick={() => updateUser(id, "accept")} sx={{ bgcolor: checkBoxColor, width: `${containerWidth / 17}px`, height: `${containerWidth / 17}px` }}>
                   <CheckBox />
                 </IconButton>
-                <IconButton  sx={{ bgcolor: deniedColor, width: `${containerWidth / 17}px`, height: `${containerWidth / 17}px` }}>
+                <IconButton onClick={() => updateUser(id, "denie")} sx={{ bgcolor: deniedColor, width: `${containerWidth / 17}px`, height: `${containerWidth / 17}px` }}>
                   <DeleteForever />
                 </IconButton>
               </Box>

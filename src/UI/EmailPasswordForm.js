@@ -45,7 +45,7 @@ const EmailPasswordForm = ({ type, sendData }) => {
       passwordAgain: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email("Must be 5 characters or more")
+      email: Yup.string().email("Uncorrect email")
         .required("Required"),
       password: Yup.string()
         .min(6)
