@@ -25,24 +25,32 @@ const deniedColor = red[500];
   const minW800 = useMediaQuery("(min-width: 800px)");
 
   const updateUser = async (id, acceptOrDenie) => {
-    console.log(id, acceptOrDenie);
-    const userDoc = doc(db, "users", id);
+    try {
+        const userDoc = doc(db, "users", id);
     if (acceptOrDenie === "accept") {
       await updateDoc(userDoc, { acceptionStatus: "accepted" });
     } else {
       await updateDoc(userDoc, { acceptionStatus: "denied" });
     }
+    } catch (err) {
+        alert(err);
+    };
+    
     getUsers();
     getUsersWithSomeStatus(typeOfUsers);
   };
 
   const getUsers = async () => {
-    const data = await getDocs(usersCollectionRef);
-    const users = data.docs.map((doc) => ({
+      try {
+          const data = await getDocs(usersCollectionRef);
+          const users = data.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
     }));
     return users;
+      } catch (err) {
+          alert(err);
+      };
   };
 
   const getUsersWithSomeStatus = async (acceptionStatus) => {

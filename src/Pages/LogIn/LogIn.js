@@ -14,10 +14,14 @@ const LogIn = () => {
     const usersCollectionRef = collection(db, "users");
     useEffect(() => {
         const getUsers = async() => {
-          const data = await getDocs(usersCollectionRef);
-        users = (data.docs.map((doc) => ({
+            try {
+                const data = await getDocs(usersCollectionRef);
+                users = (data.docs.map((doc) => ({
               ...doc.data()
           })))
+            } catch (err) {
+                alert(err);
+            };
         };
         getUsers();
     }, []);

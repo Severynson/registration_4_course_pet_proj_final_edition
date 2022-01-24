@@ -17,8 +17,12 @@ const Registration = () => {
     };
 
     const addInfoAbouUser = async(inputValues) => {
-        userData =  {...userData, ...inputValues}
+        try {
+            userData =  {...userData, ...inputValues}
         await addDoc(usersCollectionRef, userData);
+        } catch (err) {
+            alert(err);
+        };
         setSecondStepDone(true);
     };
 
