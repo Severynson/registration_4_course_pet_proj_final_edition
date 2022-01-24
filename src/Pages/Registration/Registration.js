@@ -3,13 +3,15 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase";
 import SecondStep from "./SecondStep/SecondStep";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 let userData;
 
 const Registration = () => {
+    const  navigate = useNavigate();
     const usersCollectionRef = collection(db, "users");
     const [firstStepDone, setFirstStepDone] = useState(false);
-    const [secondStepDone, setSecondStepDone] = useState(false);
+    const [secondStepDone] = useState(false);
 
     const addUsernameAndPassword = (inputValues) => {
         setFirstStepDone(true);
@@ -23,7 +25,7 @@ const Registration = () => {
         } catch (err) {
             alert(err);
         };
-        setSecondStepDone(true);
+        navigate("/mainpage");
     };
 
   return (
