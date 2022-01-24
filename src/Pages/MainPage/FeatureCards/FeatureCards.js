@@ -5,7 +5,7 @@ import {
   Typography,
   Grid,
 } from "@mui/material";
-
+import { memo } from "react";
 import SchoolIcon from "@mui/icons-material/School";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import PublicIcon from "@mui/icons-material/Public";
@@ -86,4 +86,4 @@ const FeatureCards = () => {
   );
 };
 
-export default FeatureCards;
+export default memo(FeatureCards);

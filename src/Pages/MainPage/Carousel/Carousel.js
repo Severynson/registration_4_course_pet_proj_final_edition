@@ -8,6 +8,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
+import { memo } from "react";
 
 const carouselPages = [
   {
@@ -230,4 +231,4 @@ const Carousel = () => {
   );
 };
 
-export default Carousel;
+export default memo(Carousel);

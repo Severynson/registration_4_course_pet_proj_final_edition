@@ -4,7 +4,6 @@ import { db } from "../../firebase";
 import SecondStep from "./SecondStep/SecondStep";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 let userData;
 
 const Registration = () => {

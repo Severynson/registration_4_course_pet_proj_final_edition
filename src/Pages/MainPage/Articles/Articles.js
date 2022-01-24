@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import { useMediaQuery } from "@mui/material";
-import {Fragment} from "react";
+import { Fragment, memo } from "react";
 
 const articles = [
   {
@@ -23,7 +23,7 @@ const articles = [
 ];
 
 const Articles = () => {
-    const maxW370 = useMediaQuery("(max-width: 370px)");
+  const maxW370 = useMediaQuery("(max-width: 370px)");
 
   return (
     <Box
@@ -69,4 +69,4 @@ const Articles = () => {
   );
 };
 
-export default Articles;
+export default memo(Articles);

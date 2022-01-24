@@ -5,24 +5,7 @@ import writingSomething from "../../../../Images/writing-something.jpg";
 import workspace from "../../../../Images/workspace.jpg";
 import talkingAboutSomething from "../../../../Images/talkingAboutSomething.jpeg";
 import { useMediaQuery } from '@mui/material';
-
-
-const Gallery = () => {
-  const maxW390 = useMediaQuery("(max-width: 390px)");
-
-    return (<ImageList sx={{ width: !maxW390 ? 500 : 300, height: 450 }} cols={2}>
-        {itemData.map((item) => (
-          <ImageListItem key={item.img}>
-            <img
-              src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading="lazy"
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>);
-};
+import { memo } from "react";
 
 const itemData = [
   {
@@ -51,4 +34,21 @@ const itemData = [
   },
 ];
 
-export default Gallery;
+const Gallery = () => {
+  const maxW390 = useMediaQuery("(max-width: 390px)");
+
+    return (<ImageList sx={{ width: !maxW390 ? 500 : 300, height: 450 }} cols={2}>
+        {itemData.map((item) => (
+          <ImageListItem key={item.img}>
+            <img
+              src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+              srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+              alt={item.title}
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>);
+};
+
+export default memo(Gallery);
