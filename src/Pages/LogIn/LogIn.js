@@ -20,7 +20,7 @@ const LogIn = () => {
           })))
         };
         getUsers();
-    }, [])
+    }, []);
 
     const handleLoginAndPassword = async (e) => {
         const {email, password} = e;

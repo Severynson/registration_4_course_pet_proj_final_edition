@@ -10,26 +10,6 @@ const itemsBgColor = blue[200];
 const checkBoxColor = teal[500];
 const deniedColor = red[500];
 
-const DUMMY_USERLIST = [
-  {
-    name: "Severyn",
-    surname: "Kurach",
-    aboutYourself: "Hi, I'm Severyn! Want to study a lot! Please, let me in...",
-  },
-  {
-    name: "Roman",
-    surname: "Nihto",
-    aboutYourself:
-      "Hi, I'm boring! Don't want to study at all! Let me in if you want))",
-  },
-  {
-    name: "Syava",
-    surname: "Krasava",
-    aboutYourself:
-      "Hi, I'm very cool guy, but lazy! Want to study a lot! Please, let me in...",
-  },
-];
-
   const Admin = () => {
   const [users, setUsers] = useState([]);
   const [typeOfUsers, setTypeOfUsers] = useState("unwatched yet");
@@ -77,7 +57,7 @@ const DUMMY_USERLIST = [
 
   useEffect(() => {
     getUsersWithSomeStatus(typeOfUsers);
-  }, []);
+  }, [typeOfUsers]);
 
   useEffect(() => {
     if (maxW400) {

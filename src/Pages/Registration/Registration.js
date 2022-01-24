@@ -13,7 +13,6 @@ const Registration = () => {
 
     const addUsernameAndPassword = (inputValues) => {
         setFirstStepDone(true);
-        const {email, password} = inputValues;
         return userData = inputValues;
     };
 
