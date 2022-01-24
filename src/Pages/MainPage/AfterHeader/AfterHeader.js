@@ -3,7 +3,7 @@ import Gallery from "./Gallery/Gallery";
 import reactImg from "../../../Images/react.png"
 import { Typography, Box } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
-import { memo } from "react";
+
 
 
 const AfterHeader = () => {
@@ -34,4 +34,4 @@ const AfterHeader = () => {
   );
 };
 
-export default memo(AfterHeader);
+export default AfterHeader;

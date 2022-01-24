@@ -33,12 +33,12 @@ const EmailPasswordForm = ({ type, sendData }) => {
     } else if (!bulinForAnimation) {
       setAnimation(hulkData);
     }
-    
+
     const animationTimer = setTimeout(() => {
     setBulinForAnimation((prevState) => !prevState);
   }, 7000);
   
-    return () => clearTimeout(animationTimer);
+    return () => {clearTimeout(animationTimer)};
   }, [bulinForAnimation]);
 
   

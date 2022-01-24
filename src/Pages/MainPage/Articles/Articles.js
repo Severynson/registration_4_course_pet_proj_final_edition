@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import { useMediaQuery } from "@mui/material";
-import { Fragment, memo } from "react";
+import { Fragment } from "react";
 
 const articles = [
   {
@@ -69,4 +69,4 @@ const Articles = () => {
   );
 };
 
-export default memo(Articles);
+export default Articles;
