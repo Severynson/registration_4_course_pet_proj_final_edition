@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
-import { userActions } from "../../store/slices/userSlice";
+import { logIn } from "../../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 
 let users;
@@ -26,7 +26,7 @@ const LogIn = () => {
         const {email, password} = e;
         const isUserExist = users.find(item => item.email === email && item.password === password);
         if (isUserExist !== undefined) {
-            dispatch(userActions.logIn(isUserExist));
+            dispatch(logIn(isUserExist));
             navigate("/accountCabinet")
         } else {
             alert("Something was writen uncorrect!");

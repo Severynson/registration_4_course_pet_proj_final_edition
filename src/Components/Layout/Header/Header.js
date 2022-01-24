@@ -11,7 +11,7 @@ import reactDom from "react-dom";
 import { useMediaQuery } from "@mui/material";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { userActions } from "../../../store/slices/userSlice";
+import { logOut } from "../../../store/slices/userSlice";
 const navTextColor = grey[50];
 
 const navStyle = () => ({isActive}) => ({color: isActive ? "#1565c0" : "#fafafa", backgroundColor: isActive ? "#fafafa" : "", textDecoration: "none", transition: "all 0.5s", transform: isActive ? "translateY(10%)" : ""});
@@ -50,7 +50,7 @@ const Header = () => {
             <Button color="inherit" >Login</Button>
           </NavLink>}
           {userIsLogedIn && !maxW700 && <NavLink  to="mainpage" style={navStyle()}>
-            <Button color="inherit" onClick={() => dispatch(userActions.logOut())} >Logout</Button>
+            <Button color="inherit" onClick={() => dispatch(logOut())} >Logout</Button>
           </NavLink>}
           {!userIsLogedIn && <NavLink to="mainpage" style={navStyle()}>
             <Button color="inherit" ><Home /></Button>
@@ -95,7 +95,7 @@ const Header = () => {
         sx={{ m: 2, bgcolor: "#fff", width: "300px" }}
         onClick={() => {
           navigate("/mainpage");
-          dispatch(userActions.logOut());
+          dispatch(logOut());
           setNavBar(prevState => !prevState);
         }}
       >

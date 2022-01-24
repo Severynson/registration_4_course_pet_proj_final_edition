@@ -3,7 +3,7 @@ import { blue } from "@mui/material/colors";
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { userActions } from "../../store/slices/userSlice";
+import { logOut } from "../../store/slices/userSlice";
 const backgroundColor = blue[200];
 
 const AccountCabinet = () => {
@@ -19,7 +19,7 @@ const AccountCabinet = () => {
         endIcon={<LogoutIcon />}
         sx={{ m: 2, bgcolor: "#fff", width: "300px" }}
         onClick={() => {  
-          dispatch(userActions.logOut());
+          dispatch(logOut());
           navigate("/mainpage")
         }}
       >

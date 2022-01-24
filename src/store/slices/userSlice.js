@@ -11,7 +11,7 @@ const initialState = {
     acceptionStatus: null,
 };
 
-export const userSlice = createSlice({
+export const { reducer, actions } = createSlice({
     name: "user",
     initialState,
     reducers: {
@@ -38,4 +38,5 @@ export const userSlice = createSlice({
     }
 });
 
-export const userActions = userSlice.actions;
+export const {logIn, logOut} = actions;
+export default reducer;
