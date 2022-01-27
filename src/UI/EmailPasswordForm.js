@@ -33,14 +33,7 @@ const EmailPasswordForm = ({ type, sendData }) => {
       setAnimation(hulkData);
     }
 
-    const timer = setTimeout(() => {
-
-
-        setBooleanForAnimation((prevState) => !prevState);
-
-      
-    }, 7000);
-
+    const timer = setTimeout(() => setBooleanForAnimation((prevState) => !prevState), 7000);
     return () => clearTimeout(timer);
   }, [booleanForAnimation]);
 
