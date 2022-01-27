@@ -21,29 +21,30 @@ const hulkData = [hulk, "After course"];
 const flandersData = [flanders, "Before course"];
 
 const EmailPasswordForm = ({ type, sendData }) => {
-  const [isRegistration] = useState(
-    type === "registration" ? true : false
-  );
+  const [isRegistration] = useState(type === "registration" ? true : false);
   const [animation, setAnimation] = useState(hulkData);
-  const [bulinForAnimation, setBulinForAnimation] = useState(true);
+  const [booleanForAnimation, setBooleanForAnimation] = useState(true);
+
 
   useEffect(() => {
-    if (bulinForAnimation) {
+    if (booleanForAnimation) {
       setAnimation(flandersData);
-    } else if (!bulinForAnimation) {
+    } else {
       setAnimation(hulkData);
     }
 
-    const animationTimer = setTimeout(() => {
-    setBulinForAnimation((prevState) => !prevState);
-  }, 7000);
-  
-    return () => {clearTimeout(animationTimer)};
-  }, [bulinForAnimation]);
+    const timer = setTimeout(() => {
 
-  
-     
- 
+
+        setBooleanForAnimation((prevState) => !prevState);
+
+      
+    }, 7000);
+
+    return () => clearTimeout(timer);
+  }, [booleanForAnimation]);
+
+
 
   const { handleSubmit, handleChange, values, touched, errors } = useFormik({
     initialValues: {
@@ -52,19 +53,20 @@ const EmailPasswordForm = ({ type, sendData }) => {
       passwordAgain: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email("Uncorrect email")
-        .required("Required"),
+      email: Yup.string().email("Uncorrect email").required("Required"),
       password: Yup.string()
         .min(6)
         .matches(/\d/, "Has to include a number")
         .required("Required"),
       passwordAgain:
         isRegistration &&
-        Yup.string().oneOf([Yup.ref("password")], "Passwords are not matching").required("Required"),
+        Yup.string()
+          .oneOf([Yup.ref("password")], "Passwords are not matching")
+          .required("Required"),
     }),
     onSubmit: (values, formikHelpers) => {
-      const {email, password} = values;
-      const dataToSend = {email, password};
+      const { email, password } = values;
+      const dataToSend = { email, password };
       sendData(dataToSend);
       formikHelpers.resetForm();
     },
@@ -96,6 +98,7 @@ const EmailPasswordForm = ({ type, sendData }) => {
         >
           {animation[1]}
         </Typography>
+        
       </Grid>
       <Grid item  xs={12} md={6} xl={6} justifyContent="center" alignItems="center">
       <Grid
@@ -192,6 +195,8 @@ const EmailPasswordForm = ({ type, sendData }) => {
       </Grid>
       </Grid>
       </Grid>
+      {/* {animation[0]}
+      {animation[1]} */}
     </Box>
   );
 };

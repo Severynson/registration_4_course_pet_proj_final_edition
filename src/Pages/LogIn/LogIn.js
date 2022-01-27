@@ -1,4 +1,4 @@
-import LoginPasswordForm from "../../UI/EmailPasswordForm";
+import EmailPasswordForm from "../../UI/EmailPasswordForm";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { collection, getDocs } from "firebase/firestore";
@@ -30,14 +30,14 @@ const LogIn = () => {
         const {email, password} = e;
         const isUserExist = users.find(item => item.email === email && item.password === password);
         if (isUserExist !== undefined) {
-            dispatch(logIn(isUserExist));
+            await dispatch(logIn(isUserExist));
             navigate("/accountCabinet")
         } else {
             alert("Something was writen uncorrect!");
         }
     };
 
-    return (<LoginPasswordForm type="login" sendData={handleLoginAndPassword} />);
+    return (<EmailPasswordForm type="login" sendData={handleLoginAndPassword} />);
 };
 
 export default LogIn;
