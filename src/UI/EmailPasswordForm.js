@@ -25,7 +25,6 @@ const EmailPasswordForm = ({ type, sendData }) => {
   const [animation, setAnimation] = useState(hulkData);
   const [booleanForAnimation, setBooleanForAnimation] = useState(true);
 
-
   useEffect(() => {
     if (booleanForAnimation) {
       setAnimation(flandersData);
@@ -33,11 +32,12 @@ const EmailPasswordForm = ({ type, sendData }) => {
       setAnimation(hulkData);
     }
 
-    const timer = setTimeout(() => setBooleanForAnimation((prevState) => !prevState), 7000);
+    const timer = setTimeout(
+      () => setBooleanForAnimation((prevState) => !prevState),
+      7000
+    );
     return () => clearTimeout(timer);
   }, [booleanForAnimation]);
-
-
 
   const { handleSubmit, handleChange, values, touched, errors } = useFormik({
     initialValues: {
@@ -77,116 +77,133 @@ const EmailPasswordForm = ({ type, sendData }) => {
       }}
     >
       <Grid container>
-      <Grid item xs={12} md={6} xl={6} sx={{ width: "300px", height: "300px", position: "relative" }}>
-        <CardMedia component="img" src={animation[0]} height="300px" width= "300px" />
-        <Typography
-          sx={{
-            position: "absolute",
-            bottom: "10px",
-            color: "#fff",
-            lineHeight: "0.75",
-            textAlign: "center",
-          }}
-          variant="h2"
+        <Grid
+          item
+          xs={12}
+          md={6}
+          xl={6}
+          sx={{ width: "300px", height: "300px", position: "relative" }}
         >
-          {animation[1]}
-        </Typography>
-        
-      </Grid>
-      <Grid item  xs={12} md={6} xl={6} justifyContent="center" alignItems="center">
-      <Grid
-        sx={{marginTop: "17%", marginBottom: "45px"}}
-        container
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Formik>
-          <Form onSubmit={handleSubmit}>
-            <Grid
-              container
-              direction="column"
-              alignItems="center"
-              width="300px"
-            >
-              <Grid item>
-                <FormControl variant="filled">
-                  <InputLabel htmlFor="email">Email</InputLabel>
-                  <FilledInput
-                    id="email"
-                    name="email"
-                    value={values.email}
-                    onChange={handleChange}
-                    aria-describedby="component-error-text"
-                  />
-                  {touched.email && errors.email && (
-                    <FormHelperText
-                      sx={{ color: red[500] }}
-                      id="component-error-text"
-                    >
-                      {errors.email}
-                    </FormHelperText>
-                  )}
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl variant="filled">
-                  <InputLabel htmlFor="password">Password</InputLabel>
-                  <FilledInput
-                    id="password"
-                    name="password"
-                    value={values.password}
-                    onChange={handleChange}
-                    aria-describedby="component-error-text"
-                  />
-                  {touched.password && errors.password && (
-                    <FormHelperText
-                      sx={{ color: red[500] }}
-                      id="component-error-text"
-                    >
-                      {errors.password}
-                    </FormHelperText>
-                  )}
-                </FormControl>
-              </Grid>
-              {isRegistration && (
-                <Grid item>
-                  <FormControl variant="filled">
-                    <InputLabel htmlFor="passwordAgain">
-                      Password again
-                    </InputLabel>
-                    <FilledInput
-                      id="passwordAgain"
-                      name="passwordAgain"
-                      value={values.passwordAgain}
-                      onChange={handleChange}
-                      aria-describedby="component-error-text"
-                    />
-                    {touched.passwordAgain && errors.passwordAgain && (
-                      <FormHelperText
-                        sx={{ color: red[500] }}
-                        id="component-error-text"
-                      >
-                        {errors.passwordAgain}
-                      </FormHelperText>
-                    )}
-                  </FormControl>
-                </Grid>
-              )}
-
-              <Grid item>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  endIcon={<SendIcon />}
+          <CardMedia
+            component="img"
+            src={animation[0]}
+            height="300px"
+            width="300px"
+          />
+          <Typography
+            sx={{
+              position: "absolute",
+              bottom: "10px",
+              color: "#fff",
+              lineHeight: "0.75",
+              textAlign: "center",
+            }}
+            variant="h2"
+          >
+            {animation[1]}
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          xl={6}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Grid
+            sx={{ marginTop: "17%", marginBottom: "45px" }}
+            container
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Formik>
+              <Form onSubmit={handleSubmit}>
+                <Grid
+                  container
+                  direction="column"
+                  alignItems="center"
+                  width="300px"
                 >
-                  Submit
-                </Button>
-              </Grid>
-            </Grid>
-          </Form>
-        </Formik>
-      </Grid>
-      </Grid>
+                  <Grid item>
+                    <FormControl variant="filled">
+                      <InputLabel htmlFor="email">Email</InputLabel>
+                      <FilledInput
+                        id="email"
+                        name="email"
+                        value={values.email}
+                        onChange={handleChange}
+                        aria-describedby="component-error-text"
+                      />
+                      {touched.email && errors.email && (
+                        <FormHelperText
+                          sx={{ color: red[500] }}
+                          id="component-error-text"
+                        >
+                          {errors.email}
+                        </FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControl variant="filled">
+                      <InputLabel htmlFor="password">Password</InputLabel>
+                      <FilledInput
+                        id="password"
+                        name="password"
+                        value={values.password}
+                        onChange={handleChange}
+                        aria-describedby="component-error-text"
+                      />
+                      {touched.password && errors.password && (
+                        <FormHelperText
+                          sx={{ color: red[500] }}
+                          id="component-error-text"
+                        >
+                          {errors.password}
+                        </FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+                  {isRegistration && (
+                    <Grid item>
+                      <FormControl variant="filled">
+                        <InputLabel htmlFor="passwordAgain">
+                          Password again
+                        </InputLabel>
+                        <FilledInput
+                          id="passwordAgain"
+                          name="passwordAgain"
+                          value={values.passwordAgain}
+                          onChange={handleChange}
+                          aria-describedby="component-error-text"
+                        />
+                        {touched.passwordAgain && errors.passwordAgain && (
+                          <FormHelperText
+                            sx={{ color: red[500] }}
+                            id="component-error-text"
+                          >
+                            {errors.passwordAgain}
+                          </FormHelperText>
+                        )}
+                      </FormControl>
+                    </Grid>
+                  )}
+
+                  <Grid item>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      endIcon={<SendIcon />}
+                    >
+                      Submit
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Form>
+            </Formik>
+          </Grid>
+        </Grid>
       </Grid>
       {/* {animation[0]}
       {animation[1]} */}

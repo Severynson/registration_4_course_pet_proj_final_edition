@@ -1,4 +1,12 @@
-import { Grid, Box, Typography, IconButton, AppBar, Toolbar, Button } from "@mui/material";
+import {
+  Grid,
+  Box,
+  Typography,
+  IconButton,
+  AppBar,
+  Toolbar,
+  Button,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { blue, teal, red } from "@mui/material/colors";
 import { CheckBox, DeleteForever } from "@mui/icons-material";
@@ -10,7 +18,7 @@ const itemsBgColor = blue[200];
 const checkBoxColor = teal[500];
 const deniedColor = red[500];
 
-  const Admin = () => {
+const Admin = () => {
   const [users, setUsers] = useState([]);
   const [typeOfUsers, setTypeOfUsers] = useState("unwatched yet");
   const usersCollectionRef = collection(db, "users");
@@ -26,42 +34,42 @@ const deniedColor = red[500];
 
   const updateUser = async (id, acceptOrDenie) => {
     try {
-        const userDoc = doc(db, "users", id);
-    if (acceptOrDenie === "accept") {
-      await updateDoc(userDoc, { acceptionStatus: "accepted" });
-    } else {
-      await updateDoc(userDoc, { acceptionStatus: "denied" });
-    }
+      const userDoc = doc(db, "users", id);
+      if (acceptOrDenie === "accept") {
+        await updateDoc(userDoc, { acceptionStatus: "accepted" });
+      } else {
+        await updateDoc(userDoc, { acceptionStatus: "denied" });
+      }
     } catch (err) {
-        alert(err);
-    };
-    
+      alert(err);
+    }
+
     getUsers();
     getUsersWithSomeStatus(typeOfUsers);
   };
 
   const getUsers = async () => {
-      try {
-          const data = await getDocs(usersCollectionRef);
-          const users = data.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    return users;
-      } catch (err) {
-          alert(err);
-      };
+    try {
+      const data = await getDocs(usersCollectionRef);
+      const users = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      return users;
+    } catch (err) {
+      alert(err);
+    }
   };
 
   const getUsersWithSomeStatus = async (acceptionStatus) => {
-        const users = await getUsers();
-      let unwatchedUsers = [];
-      users.forEach((user) => {
-        if (user.acceptionStatus === acceptionStatus)
-          unwatchedUsers.push({ ...user });
-      });
-      setUsers(unwatchedUsers);
-    };
+    const users = await getUsers();
+    let unwatchedUsers = [];
+    users.forEach((user) => {
+      if (user.acceptionStatus === acceptionStatus)
+        unwatchedUsers.push({ ...user });
+    });
+    setUsers(unwatchedUsers);
+  };
 
   useEffect(() => {
     getUsersWithSomeStatus(typeOfUsers);
@@ -102,21 +110,42 @@ const deniedColor = red[500];
         sx={{ width: `${containerWidth}px`, m: "0 auto", marginTop: "9%" }}
         columns={4}
       >
-          <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar sx={{display: "flex", justifyContent: 'space-evenly'}}>
-          <Button onClick={() => {
-              setTypeOfUsers("unwatched yet")
-              getUsersWithSomeStatus("unwatched yet")}} color="inherit" size="large">Unwatched</Button>
-          <Button onClick={() => {
-              setTypeOfUsers("accepted")
-              getUsersWithSomeStatus("accepted")}} color="inherit" size="large">Accepted</Button>
-          <Button onClick={() => {
-              setTypeOfUsers("denied")
-              getUsersWithSomeStatus("denied")}} color="inherit" size="large">Denied</Button>
-        </Toolbar>
-      </AppBar>
-    </Box>
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="static">
+            <Toolbar sx={{ display: "flex", justifyContent: "space-evenly" }}>
+              <Button
+                onClick={() => {
+                  setTypeOfUsers("unwatched yet");
+                  getUsersWithSomeStatus("unwatched yet");
+                }}
+                color="inherit"
+                size="large"
+              >
+                Unwatched
+              </Button>
+              <Button
+                onClick={() => {
+                  setTypeOfUsers("accepted");
+                  getUsersWithSomeStatus("accepted");
+                }}
+                color="inherit"
+                size="large"
+              >
+                Accepted
+              </Button>
+              <Button
+                onClick={() => {
+                  setTypeOfUsers("denied");
+                  getUsersWithSomeStatus("denied");
+                }}
+                color="inherit"
+                size="large"
+              >
+                Denied
+              </Button>
+            </Toolbar>
+          </AppBar>
+        </Box>
         <Grid item sx={{ bgcolor: itemsBgColor }}>
           <Box display="flex" sx={{ width: `${containerWidth}px` }}>
             <Box

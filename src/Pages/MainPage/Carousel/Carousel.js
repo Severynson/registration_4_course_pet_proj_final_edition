@@ -38,13 +38,11 @@ const carouselPages = [
 ];
 
 const Carousel = () => {
-
   const [offset, setOffset] = useState(0);
   const [showArrowBack, setShowArrowBack] = useState(true);
   const [showArrowForward, setShowArrowForward] = useState(true);
   const quantityOfSlides = carouselPages.length;
   const [sliderPosition, setSliderPosition] = useState(1);
-
 
   const [scaleValue, setScaleValue] = useState(1);
   const [translateX, setTranslateX] = useState(0);
@@ -79,58 +77,70 @@ const Carousel = () => {
   }, [sliderPosition, quantityOfSlides]);
 
   useEffect(() => {
-   if (maxW350) {
-    setScaleValue(0.35);
-    setTranslateX(95);
-    setTranslateY(95);
-   } else if (maxW400) {
-    setScaleValue(0.4);
-    setTranslateX(75);
-    setTranslateY(80);
-   } else if (maxW450) {
-    setScaleValue(0.45);
-    setTranslateX(59);
-    setTranslateY(68);
-   } else if (maxW500) {
-    setScaleValue(0.5);
-    setTranslateX(47);
-    setTranslateY(55);
-   } else if (maxW550) {
-    setScaleValue(0.55);
-    setTranslateX(36);
-    setTranslateY(43);
-   } else if (maxW600) {
-    setScaleValue(0.6);
-    setTranslateX(27.5);
-    setTranslateY(35);
-   } else if (maxW650) {
-    setScaleValue(0.7);
-    setTranslateX(21);
-    setTranslateY(25);
-   } else if (maxW700) {
-    setScaleValue(0.75);
-    setTranslateX(15);
-    setTranslateY(16);
-   } else if (maxW750) {
-    setScaleValue(0.8);
-    setTranslateX(11);
-    setTranslateY(13);
-   } else if (maxW800) {
-    setScaleValue(0.85);
-    setTranslateX(5);
-    setTranslateY(8);
-   } else if (maxW850) {
-    setScaleValue(0.9);
-    setTranslateX(2.5);
-    setTranslateY(3);
-   } else if (maxW900) {
-    setScaleValue(1);
-    setTranslateX(0);
-    setTranslateY(0);
-   }
-   
-
-  }, [maxW300, maxW350, maxW400, maxW450, maxW500, maxW550, maxW600, maxW650, maxW700, maxW750, maxW800, maxW850, maxW900]);
+    if (maxW350) {
+      setScaleValue(0.35);
+      setTranslateX(95);
+      setTranslateY(95);
+    } else if (maxW400) {
+      setScaleValue(0.4);
+      setTranslateX(75);
+      setTranslateY(80);
+    } else if (maxW450) {
+      setScaleValue(0.45);
+      setTranslateX(59);
+      setTranslateY(68);
+    } else if (maxW500) {
+      setScaleValue(0.5);
+      setTranslateX(47);
+      setTranslateY(55);
+    } else if (maxW550) {
+      setScaleValue(0.55);
+      setTranslateX(36);
+      setTranslateY(43);
+    } else if (maxW600) {
+      setScaleValue(0.6);
+      setTranslateX(27.5);
+      setTranslateY(35);
+    } else if (maxW650) {
+      setScaleValue(0.7);
+      setTranslateX(21);
+      setTranslateY(25);
+    } else if (maxW700) {
+      setScaleValue(0.75);
+      setTranslateX(15);
+      setTranslateY(16);
+    } else if (maxW750) {
+      setScaleValue(0.8);
+      setTranslateX(11);
+      setTranslateY(13);
+    } else if (maxW800) {
+      setScaleValue(0.85);
+      setTranslateX(5);
+      setTranslateY(8);
+    } else if (maxW850) {
+      setScaleValue(0.9);
+      setTranslateX(2.5);
+      setTranslateY(3);
+    } else if (maxW900) {
+      setScaleValue(1);
+      setTranslateX(0);
+      setTranslateY(0);
+    }
+  }, [
+    maxW300,
+    maxW350,
+    maxW400,
+    maxW450,
+    maxW500,
+    maxW550,
+    maxW600,
+    maxW650,
+    maxW700,
+    maxW750,
+    maxW800,
+    maxW850,
+    maxW900,
+  ]);
 
   const slideBack = () => {
     const newPosition = offset + 800;

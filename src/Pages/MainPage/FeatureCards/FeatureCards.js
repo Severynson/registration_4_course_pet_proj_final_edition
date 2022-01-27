@@ -50,7 +50,7 @@ const FeatureCards = () => {
       spacing={2}
       justifyContent="center"
       alignItems="center"
-      sx={{marginBottom: "20px"}}
+      sx={{ marginBottom: "20px" }}
     >
       {cards.map(({ icon, title, description }, i) => {
         return (

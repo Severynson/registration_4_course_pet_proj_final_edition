@@ -9,35 +9,37 @@ import { useNavigate } from "react-router-dom";
 let users;
 
 const LogIn = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const usersCollectionRef = collection(db, "users");
-    useEffect(() => {
-        const getUsers = async() => {
-            try {
-                const data = await getDocs(usersCollectionRef);
-                users = (data.docs.map((doc) => ({
-              ...doc.data()
-          })))
-            } catch (err) {
-                alert(err);
-            };
-        };
-        getUsers();
-    }, []);
-
-    const handleLoginAndPassword = async (e) => {
-        const {email, password} = e;
-        const isUserExist = users.find(item => item.email === email && item.password === password);
-        if (isUserExist !== undefined) {
-            await dispatch(logIn(isUserExist));
-            navigate("/accountCabinet")
-        } else {
-            alert("Something was writen uncorrect!");
-        }
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const usersCollectionRef = collection(db, "users");
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const data = await getDocs(usersCollectionRef);
+        users = data.docs.map((doc) => ({
+          ...doc.data(),
+        }));
+      } catch (err) {
+        alert(err);
+      }
     };
+    getUsers();
+  }, [usersCollectionRef]);
 
-    return (<EmailPasswordForm type="login" sendData={handleLoginAndPassword} />);
+  const handleLoginAndPassword = async (e) => {
+    const { email, password } = e;
+    const isUserExist = users.find(
+      (item) => item.email === email && item.password === password
+    );
+    if (isUserExist !== undefined) {
+      await dispatch(logIn(isUserExist));
+      navigate("/accountCabinet");
+    } else {
+      alert("Something was writen uncorrect!");
+    }
+  };
+
+  return <EmailPasswordForm type="login" sendData={handleLoginAndPassword} />;
 };
 
 export default LogIn;
